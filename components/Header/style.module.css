@@ -1,0 +1,97 @@
+.Header {
+    width: 100%;
+    padding: 40px 16px 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.Header .Box {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Logo p {
+    max-width: 233px;
+    font-size: 16px;
+    color: #4E4E4E;
+}
+
+.Logo svg {
+    color: #00C925;
+    width: 90px;
+    height: 51px;
+    cursor: pointer;
+}
+
+.Location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Location p {
+    max-width: 211px;
+    font-size: 16px;
+    color: #4E4E4E;
+}
+
+.Phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Phone p {
+    font-size: 16px;
+    color: #4E4E4E;
+}
+
+.Icons {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.Location svg,
+.Phone svg,
+.Icons svg {
+    color: #4E4E4E;
+    height: 28px;
+    width: 28px;
+}
+
+.Icons svg {
+    cursor: pointer;
+}
+
+.Navigation {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Navigation .Button {
+    height: 43px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #4e4e4e;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
