@@ -9,6 +9,10 @@ import Clipboard from "./Clipboard";
 import Wallet from "./Wallet";
 import Check from "./Check";
 import Close from "./Close";
+import Minus from "./Minus";
+import Plus from "./Plus";
+import ArrowDown from "./ArrowDown";
+import User from "./User";
 
 export {
     Map as MapIcon,
@@ -21,5 +25,9 @@ export {
     Clipboard as ClipboardIcon,
     Wallet as WalletIcon,
     Check as CheckIcon,
-    Close as CloseIcon
+    Close as CloseIcon,
+    Minus as MinusIcon,
+    Plus as PlusIcon,
+    ArrowDown as ArrowDownIcon,
+    User as UserIcon
 }

@@ -19,9 +19,3 @@
     align-items: flex-start;
     gap: 24px;
 }
-
-.Items {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}

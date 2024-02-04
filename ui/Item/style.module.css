@@ -1,0 +1,78 @@
+.Item {
+    width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.Item img {
+    width: 100%;
+}
+
+.Box {
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Box h3 {
+    width: 100%;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: center;
+}
+
+.Available {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Available div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #BEBEBE;
+    font-size: 14px;
+}
+
+.Available div svg {
+    color: #00B302;
+}
+
+.Available div.Not svg {
+    color: #BEBEBE;
+}
+
+.Box h4 {
+    width: 100%;
+    color: #00B302;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.Controlls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.Controlls button {
+    padding: 0;
+    width: 100%;
+}
+
+.Item.Active .Controlls {
+    opacity: 1;
+}

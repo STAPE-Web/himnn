@@ -19,8 +19,8 @@ const CategoryItems = () => {
     return (
         <div className={styles.List}>
             {items.map((item, index) => (
-                <div key={index} className={styles.Item}>
-                    <Image src={item.image} alt="" />
+                <div key={index} className={styles.Item} onClick={() => router.push("/category/asbokarton")}>
+                    <Image src={item.image} width={220} height={220} alt="" />
 
                     <div>
                         <h3>{item.title}</h3>

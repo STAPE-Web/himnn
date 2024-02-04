@@ -22,7 +22,7 @@ const ListItems = () => {
             <div className={styles.List}>
                 {items.map((item, index) => (
                     <div key={index} className={styles.Item}>
-                        <Image src={item.image} alt="" />
+                        <Image src={item.image} width={300} height={250} alt="" />
 
                         <div>
                             <h3>{item.title}</h3>
