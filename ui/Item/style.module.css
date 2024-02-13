@@ -66,6 +66,8 @@
     gap: 10px;
     opacity: 0;
     transition: 0.5s;
+    max-height: 0;
+    overflow-y: hidden;
 }
 
 .Controlls button {
@@ -75,4 +77,5 @@
 
 .Item.Active .Controlls {
     opacity: 1;
+    max-height: 100px;
 }

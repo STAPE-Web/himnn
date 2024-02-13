@@ -4,12 +4,13 @@
     display: flex;
     justify-content: center;
     padding: 50px 15px 30px 15px;
-    background: url("/Home_Slider_1.png") no-repeat;
-    background-size: cover;
+    background-size: cover !important;
     background-position: center center;
     flex-direction: column;
     align-items: center;
     gap: 40px;
+    transition: 0.5s;
+    background: #000;
 }
 
 .Box {
@@ -51,8 +52,10 @@
     height: 12px;
     border-radius: 2px;
     background: #F5F5F5;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
-.Controlls div:nth-child(1) {
+.Controlls div.Active {
     background: #00B302;
 }

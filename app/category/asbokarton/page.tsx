@@ -21,7 +21,6 @@ const Category = () => {
 
         <div className={styles.Row}>
           <Filter />
-
           <CatalogItems />
         </div>
       </section>

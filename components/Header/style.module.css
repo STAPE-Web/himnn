@@ -94,4 +94,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    transition: 0.5s;
+}
+
+.Navigation .Button:hover {
+    color: #00B302;
 }

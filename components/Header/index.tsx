@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Logo from '@/assets/Logo'
 import styles from './style.module.css'
@@ -7,9 +7,11 @@ import { navigation } from './constants'
 import ButtonDefault from '@/ui/Buttons/Default'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import useGlobalStore from '@/store'
 
 const Header = () => {
     const router = useRouter()
+    const changeSearch = useGlobalStore(state => state.changeSearch)
 
     return (
         <header className={styles.Header}>
@@ -27,13 +29,13 @@ const Header = () => {
                 <div className={styles.Phone}>
                     <PhoneIcon />
                     <div>
-                        <p>+7 (831) 283-30-97</p>
-                        <p>+7 (831) 283-30-98</p>
+                        <p><Link href="tel:+78312833097">+7 (831) 283-30-97</Link></p>
+                        <p><Link href="tel:+78312833098">+7 (831) 283-30-98</Link></p>
                     </div>
                 </div>
 
                 <div className={styles.Icons}>
-                    <SearchIcon />
+                    <SearchIcon onClick={() => changeSearch(true)} />
                     <BookmarkIcon />
                     <CartIcon onClick={() => router.push("/cart")} />
                 </div>
