@@ -28,3 +28,15 @@
     flex-direction: column;
     gap: 12px;
 }
+
+@media screen and (max-width: 1300px) {
+    .Section {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .Box {
+        flex-direction: column;
+    }
+}

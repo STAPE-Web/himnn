@@ -6,6 +6,7 @@
     justify-content: space-between;
     gap: 50px;
     margin: 40px auto 0 auto;
+    padding: 0 15px;
 }
 
 .Advantages div {
@@ -23,4 +24,25 @@
 .Advantages div p {
     white-space: pre-line;
     text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .Advantages {
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .Advantages {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .Advantages div p {
+        font-size: 14px;
+    }
+
+    .Advantages div {
+        height: 100%;
+    }
 }

@@ -13,6 +13,7 @@ import Minus from "./Minus";
 import Plus from "./Plus";
 import ArrowDown from "./ArrowDown";
 import User from "./User";
+import Menu from "./Menu";
 
 export {
     Map as MapIcon,
@@ -29,5 +30,6 @@ export {
     Minus as MinusIcon,
     Plus as PlusIcon,
     ArrowDown as ArrowDownIcon,
-    User as UserIcon
+    User as UserIcon,
+    Menu as MenuIcon
 }

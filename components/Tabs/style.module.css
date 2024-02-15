@@ -19,3 +19,14 @@
 .Tabs div.Active {
     border-color: #00B302;
 }
+
+.Tabs::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .Tabs {
+        width: 100%;
+        overflow-x: scroll;
+    }
+}

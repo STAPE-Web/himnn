@@ -2,7 +2,7 @@
 
 import Logo from '@/assets/Logo'
 import styles from './style.module.css'
-import { BookmarkIcon, CartIcon, MapIcon, PhoneIcon, SearchIcon } from '@/ui/Icons'
+import { BookmarkIcon, CartIcon, MapIcon, MenuIcon, PhoneIcon, SearchIcon } from '@/ui/Icons'
 import { navigation } from './constants'
 import ButtonDefault from '@/ui/Buttons/Default'
 import { useRouter } from 'next/navigation'
@@ -12,6 +12,7 @@ import useGlobalStore from '@/store'
 const Header = () => {
     const router = useRouter()
     const changeSearch = useGlobalStore(state => state.changeSearch)
+    const changeCall = useGlobalStore(state => state.changeCall)
 
     return (
         <header className={styles.Header}>
@@ -38,6 +39,7 @@ const Header = () => {
                     <SearchIcon onClick={() => changeSearch(true)} />
                     <BookmarkIcon />
                     <CartIcon onClick={() => router.push("/cart")} />
+                    <MenuIcon />
                 </div>
             </div>
 
@@ -50,7 +52,7 @@ const Header = () => {
                     >{nav.name}</button>
                 ))}
 
-                <ButtonDefault onClick={() => ({})}>Заказать звонок</ButtonDefault>
+                <ButtonDefault onClick={() => changeCall(true)}>Заказать звонок</ButtonDefault>
             </nav>
         </header>
     )

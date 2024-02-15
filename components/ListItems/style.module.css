@@ -61,3 +61,54 @@
     line-height: 140%;
     font-weight: 300;
 }
+
+@media screen and (max-width: 1250px) {
+    .List {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .Items {
+        padding: 0 15px;
+    }
+
+    .Item img {
+        max-width: 200px;
+    }
+
+    .Item button {
+        height: 32px;
+        margin-top: 8px;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .Item div h3 {
+        font-size: 18px;
+    }
+
+    .Item div {
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Item img {
+        max-width: 150px;
+        width: 100%;
+    }
+
+    .Item div h3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+
+    .Item div p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+}

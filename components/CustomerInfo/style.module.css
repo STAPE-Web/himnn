@@ -90,3 +90,9 @@
 .CustomerInfo.Active .ButtonBox {
     display: flex;
 }
+
+@media screen and (max-width: 800px) {
+    .Top {
+        flex-direction: column;
+    }
+}

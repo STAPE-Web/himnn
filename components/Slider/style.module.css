@@ -59,3 +59,24 @@
 .Controlls div.Active {
     background: #00B302;
 }
+
+@media screen and (max-width: 900px) {
+    .Slider {
+        height: calc(100vh - 97px);
+        justify-content: flex-end;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Box h1 {
+        font-size: 28px;
+    }
+
+    .Box ul li {
+        font-size: 16px;
+    }
+
+    .Box button {
+        width: 100%;
+    }
+}

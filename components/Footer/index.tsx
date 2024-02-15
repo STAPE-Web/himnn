@@ -15,6 +15,8 @@ const Footer = () => {
                     <p>© 2014-2023 Хим-НН</p>
                 </div>
 
+                <div className={styles.Empty}></div>
+
                 <div className={styles.Group}>
                     <h3>Контакты</h3>
                     <ul>

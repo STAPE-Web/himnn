@@ -83,3 +83,29 @@
     color: #4E4E4E;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1300px) {
+    .Section {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .MainInfo {
+        flex-direction: column;
+    }
+
+    .MainInfo img {
+        width: 100%;
+    }
+
+    .Section h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .MainInfo {
+        padding: 30px 10px;
+    }
+}

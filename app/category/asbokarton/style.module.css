@@ -19,3 +19,19 @@
     align-items: flex-start;
     gap: 24px;
 }
+
+@media screen and (max-width: 1300px) {
+    .Section {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .Row {
+        flex-direction: column;
+    }
+
+    .Section h2 {
+        font-size: 24px;
+    }
+}

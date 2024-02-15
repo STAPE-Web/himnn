@@ -64,6 +64,10 @@
     align-items: center;
 }
 
+.Icons svg:last-child {
+    display: none;
+}
+
 .Location svg,
 .Phone svg,
 .Icons svg {
@@ -99,4 +103,32 @@
 
 .Navigation .Button:hover {
     color: #00B302;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .Phone,
+    .Location {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .Navigation {
+        display: none;
+    }
+
+    .Icons svg:last-child {
+        display: flex;
+    }
+
+    .Header {
+        padding-top: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Logo p {
+        display: none;
+    }
 }

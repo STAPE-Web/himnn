@@ -15,3 +15,9 @@
 .Bread div:last-child p {
     display: none;
 }
+
+@media screen and (max-width: 750px) {
+    .Bread {
+        display: none;
+    }
+}
