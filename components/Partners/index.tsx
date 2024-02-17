@@ -1,3 +1,5 @@
+"use client"
+
 import Partner1 from "@/assets/Partner1"
 import Partner2 from "@/assets/Partner2"
 import Partner3 from "@/assets/Partner3"
@@ -7,8 +9,11 @@ import Partner6 from "@/assets/Partner6"
 import Partner7 from "@/assets/Partner7"
 import Partner8 from "@/assets/Partner8"
 import styles from "./style.module.css"
+import { useState } from "react"
 
 const Partners = () => {
+    const [active, setActive] = useState(false)
+
     const partners = [
         <Partner1 key="1" />,
         <Partner2 key="2" />,
@@ -24,12 +29,16 @@ const Partners = () => {
         <div className={styles.Partners}>
             <h2>Нам доверяют</h2>
 
-            <div className={styles.List}>
+            <div className={`${styles.List} ${active ? styles.Active : ""}`}>
                 {partners.map((partner, index) => (
                     <div key={index}>
                         {partner}
                     </div>
                 ))}
+            </div>
+
+            <div className={`${styles.More} ${active ? styles.Active : ""}`} onClick={() => setActive(true)}>
+                <p>Смотреть еще</p>
             </div>
         </div>
     )

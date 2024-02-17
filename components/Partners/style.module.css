@@ -30,6 +30,23 @@
     justify-content: center;
 }
 
+.More {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 16px;
+    color: #4E4E4E;
+    font-weight: 400;
+}
+
+.List.Active div {
+    display: flex !important;
+}
+
+.More.Active {
+    display: none;
+}
+
 @media screen and (max-width: 1300px) {
     .Partners {
         padding: 0 15px;
@@ -39,8 +56,18 @@
 @media screen and (max-width: 880px) {
     .List {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
+    .List div:nth-child(5),
+    .List div:nth-child(6),
+    .List div:nth-child(7),
+    .List div:nth-child(8) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
     .List div svg {
         width: 70%;
         height: auto;

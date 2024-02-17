@@ -8,6 +8,8 @@
     display: flex;
     cursor: pointer;
     height: fit-content;
+    border: 0.3px solid transparent;
+    transition: 0.5s;
 }
 
 .Item img {
@@ -78,4 +80,8 @@
 .Item.Active .Controlls {
     opacity: 1;
     max-height: 100px;
+}
+
+.Item.Active {
+    border-color: #BEBEBE;
 }

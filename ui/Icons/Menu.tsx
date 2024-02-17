@@ -1,6 +1,4 @@
-import React from 'react'
-
-const Menu = () => {
+const Menu = (props: any) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +6,7 @@ const Menu = () => {
             height="28"
             fill="none"
             viewBox="0 0 28 28"
+            {...props}
         >
             <path
                 stroke="#00BD12"

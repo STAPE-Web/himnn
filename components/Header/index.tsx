@@ -13,6 +13,7 @@ const Header = () => {
     const router = useRouter()
     const changeSearch = useGlobalStore(state => state.changeSearch)
     const changeCall = useGlobalStore(state => state.changeCall)
+    const changeMobileMenu = useGlobalStore(state => state.changeMobileMenu)
     const path = window.location.pathname
 
     return (
@@ -40,7 +41,7 @@ const Header = () => {
                     <SearchIcon onClick={() => changeSearch(true)} />
                     <BookmarkIcon />
                     <CartIcon onClick={() => router.push("/cart")} />
-                    <MenuIcon />
+                    <MenuIcon onClick={() => changeMobileMenu(true)} />
                 </div>
             </div>
 

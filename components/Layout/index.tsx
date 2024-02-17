@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import SearchBox from '@/components/SearchBox'
 import OrderCall from '../OrderCall'
 import dynamic from 'next/dynamic';
+import MobileMenu from '../MobileMenu'
 const Header = dynamic(() => import('@/components/Header'), {
     ssr: false
 });
@@ -20,6 +21,7 @@ const Layout: FC<Props> = ({ children }) => {
             <Header />
             <SearchBox />
             <OrderCall />
+            <MobileMenu />
             <main>{children}</main>
             <Footer />
         </>

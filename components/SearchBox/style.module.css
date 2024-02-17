@@ -68,3 +68,9 @@
 .Input svg {
     color: #BEBEBE;
 }
+
+@media screen and (max-width: 450px) {
+    .Box {
+        padding: 65px 15px;
+    }
+}

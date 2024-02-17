@@ -24,6 +24,10 @@
     font-size: 18px;
 }
 
+.Top div h3 {
+    text-align: center;
+}
+
 .Top button {
     background: transparent;
     border: none;
@@ -92,7 +96,16 @@
 }
 
 @media screen and (max-width: 800px) {
+    .CustomerInfo {
+        padding: 25px 15px;
+    }
+
     .Top {
         flex-direction: column;
+    }
+
+    .Top div {
+        flex-direction: column;
+        gap: 0px;
     }
 }

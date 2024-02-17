@@ -14,6 +14,7 @@ import Plus from "./Plus";
 import ArrowDown from "./ArrowDown";
 import User from "./User";
 import Menu from "./Menu";
+import Filter from "./Filter";
 
 export {
     Map as MapIcon,
@@ -31,5 +32,6 @@ export {
     Plus as PlusIcon,
     ArrowDown as ArrowDownIcon,
     User as UserIcon,
-    Menu as MenuIcon
+    Menu as MenuIcon,
+    Filter as FilterIcon
 }
