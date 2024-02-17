@@ -13,6 +13,7 @@ const Header = () => {
     const router = useRouter()
     const changeSearch = useGlobalStore(state => state.changeSearch)
     const changeCall = useGlobalStore(state => state.changeCall)
+    const path = window.location.pathname
 
     return (
         <header className={styles.Header}>
@@ -47,7 +48,7 @@ const Header = () => {
                 {navigation.map((nav, index) => (
                     <button
                         key={index}
-                        className={styles.Button}
+                        className={`${styles.Button} ${path === nav.link ? styles.Active : ""}`}
                         onClick={() => router.push(nav.link)}
                     >{nav.name}</button>
                 ))}

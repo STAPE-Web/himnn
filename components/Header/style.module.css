@@ -101,6 +101,10 @@
     transition: 0.5s;
 }
 
+.Navigation .Button.Active {
+    color: #00B302;
+}
+
 .Navigation .Button:hover {
     color: #00B302;
 }
