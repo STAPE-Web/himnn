@@ -2,6 +2,7 @@
 
 import AdminContent from "@/components/AdminContent"
 import AdminLogin from "@/components/AdminLogin"
+import Modal from "@/components/Modal";
 import { useEffect, useState } from "react";
 
 const Admin = () => {
@@ -20,6 +21,7 @@ const Admin = () => {
                 ? <AdminContent />
                 : <AdminLogin />
             }
+            <Modal />
         </>
     )
 }
