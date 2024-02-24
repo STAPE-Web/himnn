@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react";
 import ButtonDefault from "@/ui/Buttons/Default";
 import styles from "./style.module.css";
 import { useRouter } from "next/navigation";
@@ -11,42 +10,25 @@ import "slick-carousel/slick/slick-theme.css";
 
 const SliderBox = () => {
     const router = useRouter();
-    const [slide, setSlide] = useState(0);
 
     const settings = {
-        dots: false,
+        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        // fade: true,
         arrows: false,
+        dotsClass: styles.Controlls,
     };
-
-    function fillControlls(index: number) {
-        const controls = [];
-
-        for (let i = 0; i < 5; i++) {
-            controls.push(
-                <div
-                    key={i}
-                    className={`${styles.Control} ${i === index ? styles.Active : ""}`}
-                    onClick={() => setSlide(i)}
-                ></div>
-            );
-        }
-
-        return controls;
-    }
 
     return (
         <Slider {...settings}>
             {[0, 1, 2, 3, 4].map((index) => (
                 <div key={index}>
                     <section
-                        className={`${styles.Slider} ${index === slide ? styles.ActiveSlide : ""}`}
+                        className={styles.Slider}
                         style={{ background: `url("/Home_Slider_${index}.png") no-repeat` }}
                     >
                         <div className={styles.Box}>
@@ -57,7 +39,6 @@ const SliderBox = () => {
                             </ul>
                             <ButtonDefault onClick={() => router.push("/catalog")}>Перейти в каталог</ButtonDefault>
                         </div>
-                        <div className={styles.Controlls}>{fillControlls(index)}</div>
                     </section>
                 </div>
             ))}

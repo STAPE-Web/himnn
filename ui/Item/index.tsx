@@ -19,40 +19,42 @@ const Item: FC<Props> = ({ item }) => {
     const [count, setCount] = useState("1")
 
     return (
-        <div
-            onClick={() => router.push("/item")}
-            onMouseEnter={() => setActive(true)}
-            onMouseLeave={() => setActive(false)}
-            className={`${styles.Item} ${active ? styles.Active : ""}`}
-        >
-            <Image alt="" src={item.image} width={280} height={200} />
+        <div className={styles.ItemBox}>
+            <div
+                onClick={() => router.push("/item")}
+                onMouseEnter={() => setActive(true)}
+                onMouseLeave={() => setActive(false)}
+                className={`${styles.Item} ${active ? styles.Active : ""}`}
+            >
+                <Image alt="" src={item.image} width={280} height={200} />
 
-            <div className={styles.Box}>
-                <h3>{item.title}</h3>
+                <div className={styles.Box}>
+                    <h3>{item.title}</h3>
 
-                <div className={styles.Available}>
-                    {item.available
-                        ? <div>
-                            <CheckIcon />
-                            <p>Есть в наличии</p>
-                        </div>
-                        : <div className={styles.Not}>
-                            <CloseIcon />
-                            <p>Нет в наличии</p>
-                        </div>
-                    }
-                </div>
+                    <div className={styles.Available}>
+                        {item.available
+                            ? <div>
+                                <CheckIcon />
+                                <p>Есть в наличии</p>
+                            </div>
+                            : <div className={styles.Not}>
+                                <CloseIcon />
+                                <p>Нет в наличии</p>
+                            </div>
+                        }
+                    </div>
 
-                <h4>{item.price} руб./кг</h4>
+                    <h4>{item.price} руб./кг</h4>
 
-                <div className={styles.Controlls} onClick={e => e.stopPropagation()}>
-                    {item.available
-                        ? <>
-                            <Counter value={count} setValue={setCount} />
-                            <ButtonSmall onClick={() => ({})}>В корзину</ButtonSmall>
-                        </>
-                        : <ButtonSmall onClick={() => ({})}>Под заказ</ButtonSmall>
-                    }
+                    <div className={styles.Controlls} onClick={e => e.stopPropagation()}>
+                        {item.available
+                            ? <>
+                                <Counter value={count} setValue={setCount} />
+                                <ButtonSmall onClick={() => ({})}>В корзину</ButtonSmall>
+                            </>
+                            : <ButtonSmall onClick={() => ({})}>Под заказ</ButtonSmall>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

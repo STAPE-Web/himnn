@@ -43,7 +43,8 @@
     display: flex !important;
 }
 
-.More.Active {
+.More.Active,
+.More {
     display: none;
 }
 
@@ -64,6 +65,10 @@
     .List div:nth-child(7),
     .List div:nth-child(8) {
         display: none;
+    }
+
+    .More {
+        display: flex;
     }
 }
 

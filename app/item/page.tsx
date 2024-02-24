@@ -23,6 +23,11 @@ const Item = () => {
     { link: "/item/paronit-sheet-pc-4x1030x1560mm-gost-481-80", name: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80" },
   ]
 
+  function navigate() {
+    let section = document.getElementById("Additional");
+    section?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <Layout>
       <section className={styles.Section}>
@@ -37,7 +42,9 @@ const Item = () => {
 
             <div className={styles.Title}>
               <h4>Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80</h4>
-              <More state={true} />
+              <div onClick={() => navigate()}>
+                <More state={true} />
+              </div>
             </div>
 
             <div className={styles.Price}>

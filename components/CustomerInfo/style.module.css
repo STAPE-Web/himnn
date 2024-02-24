@@ -102,10 +102,27 @@
 
     .Top {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .Top button {
+        padding-left: 32px;
     }
 
     .Top div {
+        gap: 8px;
+    }
+
+    .Top h3 {
+        text-align: start;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .Checkboxes {
         flex-direction: column;
-        gap: 0px;
+        align-items: flex-start;
+        gap: 12px;
     }
 }

@@ -14,7 +14,7 @@ const Additional = () => {
     ]
 
     return (
-        <div className={styles.Additional}>
+        <div className={styles.Additional} id="Additional">
             <h2>Характеристики</h2>
 
             <div className={styles.Box}>

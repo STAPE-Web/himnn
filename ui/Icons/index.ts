@@ -15,6 +15,9 @@ import ArrowDown from "./ArrowDown";
 import User from "./User";
 import Menu from "./Menu";
 import Filter from "./Filter";
+import Add from "./Add";
+import Delete from "./Delete";
+import Edit from "./Edit";
 
 export {
     Map as MapIcon,
@@ -33,5 +36,8 @@ export {
     ArrowDown as ArrowDownIcon,
     User as UserIcon,
     Menu as MenuIcon,
-    Filter as FilterIcon
+    Filter as FilterIcon,
+    Add as AddIcon,
+    Delete as DeleteIcon,
+    Edit as EditIcon
 }

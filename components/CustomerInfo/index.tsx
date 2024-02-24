@@ -14,6 +14,18 @@ const CustomerInfo = () => {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [comment, setComment] = useState("")
+    const [state, setState] = useState(true)
+
+    const [companyName, setCompanyName] = useState("")
+    const [address, setAddress] = useState("")
+    const [INN, setINN] = useState("")
+    const [KPP, setKPP] = useState("")
+    const [BIK, setBIK] = useState("")
+    const [checkingAccount, setCheckingAccount] = useState("")
+    const [bank, setBank] = useState("")
+    const [city, setCity] = useState("")
+    const [corespondentAccount, setCorespondentAccount] = useState("")
+    const [contactPerson, setContactPerson] = useState("")
 
     return (
         <div className={`${styles.CustomerInfo} ${active ? styles.Active : ""}`}>
@@ -31,24 +43,41 @@ const CustomerInfo = () => {
                     <label>Тип плательщика</label>
 
                     <div className={styles.Checkboxes}>
-                        <div className={styles.Checkbox}>
-                            <Checkbox2 state={true} />
+                        <div className={styles.Checkbox} onClick={() => setState(true)}>
+                            <Checkbox2 state={state} />
                             Физическое лицо
                         </div>
 
-                        <div className={styles.Checkbox}>
-                            <Checkbox2 state={false} />
+                        <div className={styles.Checkbox} onClick={() => setState(false)}>
+                            <Checkbox2 state={!state} />
                             Юридическое лицо
                         </div>
                     </div>
                 </div>
 
-                <div className={styles.Form}>
-                    <Input label="Ф.И.О." onChange={e => setFullname(e.target.value)} type="text" value={fullname} />
-                    <Input label="E-mail" onChange={e => setEmail(e.target.value)} type="email" value={email} />
-                    <Input label="Номер телефона" onChange={e => setPhone(e.target.value)} type="tel" value={phone} />
-                    <Textarea label="Комментарий к заказу" onChange={e => setComment(e.target.value)} value={comment} />
-                </div>
+                {state
+                    ? <div className={styles.Form}>
+                        <Input label="Ф.И.О." onChange={e => setFullname(e.target.value)} type="text" value={fullname} />
+                        <Input label="E-mail" onChange={e => setEmail(e.target.value)} type="email" value={email} />
+                        <Input label="Номер телефона" onChange={e => setPhone(e.target.value)} type="tel" value={phone} />
+                        <Textarea label="Комментарий к заказу" onChange={e => setComment(e.target.value)} value={comment} />
+                    </div>
+                    : <div className={styles.Form}>
+                        <Input label="Название компании*" onChange={e => setCompanyName(e.target.value)} type="text" value={companyName} />
+                        <Input label="Юридический адрес" onChange={e => setAddress(e.target.value)} type="text" value={address} />
+                        <Input label="ИНН*" onChange={e => setINN(e.target.value)} type="text" value={INN} />
+                        <Input label="КПП" onChange={e => setKPP(e.target.value)} type="text" value={KPP} />
+                        <Input label="БИК" onChange={e => setBIK(e.target.value)} type="text" value={BIK} />
+                        <Input label="Расчетный счет" onChange={e => setCheckingAccount(e.target.value)} type="text" value={checkingAccount} />
+                        <Input label="Банк для р/с" onChange={e => setBank(e.target.value)} type="text" value={bank} />
+                        <Input label="Город банка для р/с" onChange={e => setCity(e.target.value)} type="text" value={city} />
+                        <Input label="Корреспондентский счет" onChange={e => setCorespondentAccount(e.target.value)} type="text" value={corespondentAccount} />
+                        <Input label="Контактное лицо*" onChange={e => setContactPerson(e.target.value)} type="text" value={contactPerson} />
+                        <Input label="E-mail*" onChange={e => setEmail(e.target.value)} type="text" value={email} />
+                        <Input label="Телефон*" onChange={e => setPhone(e.target.value)} type="text" value={phone} />
+                        <Textarea label="Комментарий к заказу" onChange={e => setComment(e.target.value)} value={comment} />
+                    </div>
+                }
             </div>
 
             <div className={styles.ButtonBox}>

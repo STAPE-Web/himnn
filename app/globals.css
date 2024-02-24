@@ -58,3 +58,7 @@ body {
   border-color: #00B302 !important;
   border-width: 2px !important;
 }
+
+.slick-active button {
+  background: #00B302 !important;
+}
