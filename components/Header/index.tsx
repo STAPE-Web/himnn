@@ -5,7 +5,7 @@ import styles from './style.module.css'
 import { BookmarkIcon, CartIcon, MapIcon, MenuIcon, PhoneIcon, SearchIcon } from '@/ui/Icons'
 import { navigation } from './constants'
 import ButtonDefault from '@/ui/Buttons/Default'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useGlobalStore from '@/store'
 
@@ -14,7 +14,7 @@ const Header = () => {
     const changeSearch = useGlobalStore(state => state.changeSearch)
     const changeCall = useGlobalStore(state => state.changeCall)
     const changeMobileMenu = useGlobalStore(state => state.changeMobileMenu)
-    const path = window.location.pathname
+    const path = usePathname()
 
     return (
         <header className={styles.Header}>
