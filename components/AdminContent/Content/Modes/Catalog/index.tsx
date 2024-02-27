@@ -1,17 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
+import { ICatalog } from "@/types"
+import { CatalogAPI } from "@/api"
+import useGlobalStore from "@/store"
 
 const Catalog = () => {
-    const [data, setData] = useState([
-        { id: "1", data: { title: "Резинотехнические изделия", image: "/Home_Item_1.png", text: "Название товара Название товара Название товара Название товара Название товара Название товара" } },
-        { id: "2", data: { title: "Асбестотехнические изделия", image: "/Home_Item_2.png", text: "Название товара Название товара Название товара Название товара Название товара Название товара" } },
-        { id: "3", data: { title: "Электроизоляционные материалы", image: "/Home_Item_3.png", text: "Название товара Название товара Название товара Название товара Название товара Название товара" } },
-        { id: "4", data: { title: "Полимерные материалы", image: "/Home_Item_4.png", text: "Название товара Название товара Название товара Название товара Название товара Название товара" } },
-    ])
+    const changeModal = useGlobalStore(state => state.changeModal)
+    const changeModalMode = useGlobalStore(state => state.changeModalMode)
+    const changeCatalogData = useGlobalStore(state => state.changeCatalogData)
+    const [data, setData] = useState<ICatalog[]>([])
+
+    async function getAllCatalogs() {
+        const result = await CatalogAPI.getAll()
+        setData(result)
+    }
+
+    useEffect(() => {
+        getAllCatalogs()
+    }, [getAllCatalogs])
+
+    async function deleteItem(id: string) {
+        await CatalogAPI.delete(id)
+        getAllCatalogs()
+    }
+
+    function editItem(item: ICatalog) {
+        changeModal(true)
+        changeModalMode("Catalog")
+        changeCatalogData(item)
+    }
 
     return (
         <div className={styles.Filter}>
@@ -29,8 +50,8 @@ const Catalog = () => {
                     </div>
 
                     <div>
-                        <button className={styles.Edit}><EditIcon /></button>
-                        <button className={styles.Delete}><DeleteIcon /></button>
+                        <button className={styles.Edit} onClick={() => editItem(item)}><EditIcon /></button>
+                        <button className={styles.Delete} onClick={() => deleteItem(item.id)}><DeleteIcon /></button>
                     </div>
                 </div>
             ))}

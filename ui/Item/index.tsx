@@ -1,6 +1,6 @@
 "use client"
 
-import { IItem } from "@/types"
+import { IItems } from "@/types"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { FC, useState } from "react"
@@ -10,7 +10,7 @@ import { CheckIcon, CloseIcon } from "../Icons"
 import Counter from "@/components/Counter"
 
 interface Props {
-    item: IItem
+    item: IItems
 }
 
 const Item: FC<Props> = ({ item }) => {
@@ -26,13 +26,13 @@ const Item: FC<Props> = ({ item }) => {
                 onMouseLeave={() => setActive(false)}
                 className={`${styles.Item} ${active ? styles.Active : ""}`}
             >
-                <Image alt="" src={item.image} width={280} height={200} />
+                <Image alt="" src={item.data.image} width={280} height={200} />
 
                 <div className={styles.Box}>
-                    <h3>{item.title}</h3>
+                    <h3>{item.data.title}</h3>
 
                     <div className={styles.Available}>
-                        {item.available
+                        {item.data.inStock
                             ? <div>
                                 <CheckIcon />
                                 <p>Есть в наличии</p>
@@ -44,10 +44,10 @@ const Item: FC<Props> = ({ item }) => {
                         }
                     </div>
 
-                    <h4>{item.price} руб./кг</h4>
+                    <h4>{item.data.price} руб./кг</h4>
 
                     <div className={styles.Controlls} onClick={e => e.stopPropagation()}>
-                        {item.available
+                        {item.data.inStock
                             ? <>
                                 <Counter value={count} setValue={setCount} />
                                 <ButtonSmall onClick={() => ({})}>В корзину</ButtonSmall>

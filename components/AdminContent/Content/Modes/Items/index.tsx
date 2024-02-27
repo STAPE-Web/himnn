@@ -1,17 +1,23 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
+import { IItems } from "@/types"
+import { ItemsAPI } from "@/api"
 
 const Items = () => {
-    const [data, setData] = useState([
-        { id: "1", data: { title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", artikul: "12312312", image: "/Item.png", text: "Кислота, щелочи, окислители, нитрозные и другие агрессивные среды" } },
-        { id: "2", data: { title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", artikul: "12312312", image: "/Item.png", text: "Кислота, щелочи, окислители, нитрозные и другие агрессивные среды" } },
-        { id: "3", data: { title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", artikul: "12312312", image: "/Item.png", text: "Кислота, щелочи, окислители, нитрозные и другие агрессивные среды" } },
-        { id: "4", data: { title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", artikul: "12312312", image: "/Item.png", text: "Кислота, щелочи, окислители, нитрозные и другие агрессивные среды" } },
-    ])
+    const [data, setData] = useState<IItems[]>([])
+
+    async function getAllCatalogs() {
+        const result = await ItemsAPI.getAll()
+        setData(result)
+    }
+
+    useEffect(() => {
+        getAllCatalogs()
+    }, [])
 
     return (
         <div className={styles.Filter}>

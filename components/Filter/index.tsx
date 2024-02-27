@@ -1,15 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CheckList from "../CheckList"
 import Calculator from "../Calculator"
 import styles from "./style.module.css"
 import ButtonSmall from "@/ui/Buttons/Small"
 import { CloseIcon, FilterIcon } from "@/ui/Icons"
+import { IFilter } from "@/types"
+import { FilterAPI } from "@/api"
 
 const Filter = () => {
-    const sizeArray = ["15 x 15 мм", "16 x 16 мм"]
     const itemsArray = ["В наличии (100)"]
+    const sizeArray = ["15 x 15 мм", "16 x 16 мм"]
     const developerArray = ["Россия", "Китай", "Казахстан"]
 
     const [size, setSize] = useState<string[]>([])
@@ -20,6 +22,18 @@ const Filter = () => {
     const [max, setMax] = useState("1000")
 
     const [active, setActive] = useState(false)
+
+    const [data, setData] = useState<IFilter[]>([])
+    console.log(data)
+
+    async function getAllCatalogs() {
+        const result = await FilterAPI.getAll()
+        setData(result)
+    }
+
+    useEffect(() => {
+        getAllCatalogs()
+    }, [])
 
     return (
         <>
@@ -38,15 +52,12 @@ const Filter = () => {
                     <CheckList array={itemsArray} setValue={setItems} value={items} />
                 </div>
 
-                <div className={styles.Row}>
-                    <h4>Размер</h4>
-                    <CheckList array={sizeArray} setValue={setSize} value={size} />
-                </div>
-
-                <div className={styles.Row}>
-                    <h4>Производитель</h4>
-                    <CheckList array={developerArray} setValue={setDeveloper} value={developer} />
-                </div>
+                {data.map((item, index) => (
+                    <div className={styles.Row} key={index}>
+                        <h4>{item.data.title}</h4>
+                        <CheckList array={item.data.array} setValue={setSize} value={size} />
+                    </div>
+                ))}
 
                 <div className={styles.Buttons}>
                     <ButtonSmall onClick={() => ({})}>Показать</ButtonSmall>

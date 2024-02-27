@@ -1,19 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
+import { ICategory } from "@/types"
+import { CategoriesAPI } from "@/api"
+import useGlobalStore from "@/store"
 
 const Categories = () => {
-    const [data, setData] = useState([
-        { id: "1", data: { title: "Асбокартон", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-        { id: "2", data: { title: "Паронит листовой", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-        { id: "3", data: { title: "Листы асбостальные", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-        { id: "4", data: { title: "Асботкань", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-        { id: "5", data: { title: "Асбошнур", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-        { id: "6", data: { title: "Сальниковые набивки", category: "Асбестотехнические изделия", image: "/Home_Item_4.png", text: "ОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписаниеОписание" } },
-    ])
+    const changeModal = useGlobalStore(state => state.changeModal)
+    const changeModalMode = useGlobalStore(state => state.changeModalMode)
+    const changeCategoryData = useGlobalStore(state => state.changeCategoryData)
+    const [data, setData] = useState<ICategory[]>([])
+
+    async function getAllCatalogs() {
+        const result = await CategoriesAPI.getAll()
+        setData(result)
+    }
+
+    useEffect(() => {
+        getAllCatalogs()
+    }, [getAllCatalogs])
+
+    async function deleteItem(id: string) {
+        await CategoriesAPI.delete(id)
+        getAllCatalogs()
+    }
+
+    function editItem(item: ICategory) {
+        changeModal(true)
+        changeModalMode("Catagories")
+        changeCategoryData(item)
+    }
 
     return (
         <div className={styles.Filter}>
@@ -31,8 +50,8 @@ const Categories = () => {
                     </div>
 
                     <div>
-                        <button className={styles.Edit}><EditIcon /></button>
-                        <button className={styles.Delete}><DeleteIcon /></button>
+                        <button className={styles.Edit} onClick={() => editItem(item)}><EditIcon /></button>
+                        <button className={styles.Delete} onClick={() => deleteItem(item.id)}><DeleteIcon /></button>
                     </div>
                 </div>
             ))}

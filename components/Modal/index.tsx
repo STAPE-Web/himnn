@@ -1,6 +1,8 @@
 import useGlobalStore from '@/store'
 import styles from './style.module.css'
 import Filter from './Filter'
+import Catalog from './Catalog'
+import Categories from './Categories'
 
 const Modal = () => {
     const modal = useGlobalStore(state => state.modal)
@@ -9,8 +11,8 @@ const Modal = () => {
 
     function fillContent() {
         switch (modalMode) {
-            case "Catagories": return ""
-            case "Catalog": return ""
+            case "Catagories": return <Categories />
+            case "Catalog": return <Catalog />
             case "Filter": return <Filter />
             case "Items": return ""
         }
