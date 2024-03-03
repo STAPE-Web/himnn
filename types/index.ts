@@ -55,3 +55,11 @@ export type IFilter = {
         timestamp: any
     }
 }
+
+export type ICartItem = {
+    image: string,
+    title: string,
+    price: number,
+    count: number,
+    id: string
+}

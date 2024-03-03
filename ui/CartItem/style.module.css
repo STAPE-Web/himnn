@@ -30,6 +30,8 @@
     color: #BEBEBE;
     top: 15px;
     right: 45px;
+    cursor: pointer;
+    z-index: 100;
 }
 
 .Item:last-child {

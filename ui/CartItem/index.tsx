@@ -5,12 +5,7 @@ import Image from "next/image"
 import { FC, useState } from "react"
 import { CloseIcon } from "../Icons"
 import styles from "./style.module.css"
-
-type ICartItem = {
-    image: string
-    title: string
-    price: number
-}
+import { ICartItem } from "@/types"
 
 interface Props {
     item: ICartItem
@@ -18,6 +13,11 @@ interface Props {
 
 const CartItem: FC<Props> = ({ item }) => {
     const [count, setCount] = useState("1")
+
+    function removeFromCart() {
+        // const cartItems = JSON.parse(localStorage.getItem("cartItems") as string)
+        console.log(123)
+    }
 
     return (
         <>
@@ -64,7 +64,9 @@ const CartItem: FC<Props> = ({ item }) => {
                     </div>
                 </div>
 
-                <CloseIcon className={styles.Close} />
+                <div onClick={() => console.log(123)}>
+                    <CloseIcon className={styles.Close} />
+                </div>
             </div>
         </>
     )

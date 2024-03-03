@@ -1,28 +1,31 @@
 import CartItem from "@/ui/CartItem"
 import styles from "./style.module.css"
+import { ICartItem } from "@/types"
 
 const CartItems = () => {
-    const items = [
-        { image: "/Item.png", title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", price: 1190.13 },
-        { image: "/Item.png", title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", price: 1190.13 },
-    ]
+    let cartItems: ICartItem[] = [];
+    if (typeof window !== 'undefined') {
+        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
+    }
 
     return (
         <div className={styles.CartItems}>
-            <div className={styles.Top}>
-                <div>Товары</div>
-                <div>
-                    <div>Количество</div>
-                    <div>Цена</div>
-                    <div>Сумма</div>
+            {cartItems !== null && <>
+                <div className={styles.Top}>
+                    <div>Товары</div>
+                    <div>
+                        <div>Количество</div>
+                        <div>Цена</div>
+                        <div>Сумма</div>
+                    </div>
                 </div>
-            </div>
 
-            <div className={styles.List}>
-                {items.map((item, index) => (
-                    <CartItem key={index} item={item} />
-                ))}
-            </div>
+                <div className={styles.List}>
+                    {cartItems.map((item, index) => (
+                        <CartItem key={index} item={item} />
+                    ))}
+                </div>
+            </>}
         </div>
     )
 }

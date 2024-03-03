@@ -1,16 +1,29 @@
 "use client"
 
+import { FC } from "react";
 import styles from "./style.module.css"
 
-const Additional = () => {
+interface Props {
+    data: {
+        standart: string;
+        creator: string;
+        thickness: number;
+        width: number;
+        weight: number;
+        mark: string;
+        height: number;
+    }
+}
+
+const Additional: FC<Props> = ({ data }) => {
     const items = [
-        { name: "Вес, кг", value: "16.1" },
-        { name: "Длина, мм", value: "1560" },
-        { name: "Марка товара", value: "ПК" },
-        { name: "Стандарт", value: "ГОСТ 481-80" },
-        { name: "Толщина, мм", value: "4" },
-        { name: "Ширина, мм", value: "1030" },
-        { name: "Страна производитель", value: "Россия" },
+        { name: "Вес, кг", value: data.weight },
+        { name: "Длина, мм", value: data.height },
+        { name: "Марка товара", value: data.mark },
+        { name: "Стандарт", value: data.standart },
+        { name: "Толщина, мм", value: data.thickness },
+        { name: "Ширина, мм", value: data.width },
+        { name: "Страна производитель", value: data.creator },
     ]
 
     return (

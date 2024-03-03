@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
@@ -10,14 +10,15 @@ import useGlobalStore from "@/store"
 
 const Catalog = () => {
     const changeModal = useGlobalStore(state => state.changeModal)
+    const modal = useGlobalStore(state => state.modal)
     const changeModalMode = useGlobalStore(state => state.changeModalMode)
     const changeCatalogData = useGlobalStore(state => state.changeCatalogData)
     const [data, setData] = useState<ICatalog[]>([])
 
-    async function getAllCatalogs() {
+    const getAllCatalogs = useCallback(async () => {
         const result = await CatalogAPI.getAll()
         setData(result)
-    }
+    }, [modal])
 
     useEffect(() => {
         getAllCatalogs()

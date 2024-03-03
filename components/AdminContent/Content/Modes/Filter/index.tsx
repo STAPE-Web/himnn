@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import useGlobalStore from "@/store"
@@ -9,14 +9,15 @@ import { FilterAPI } from "@/api"
 
 const Filter = () => {
     const changeModal = useGlobalStore(state => state.changeModal)
+    const modal = useGlobalStore(state => state.modal)
     const changeModalMode = useGlobalStore(state => state.changeModalMode)
     const changeFilterData = useGlobalStore(state => state.changeFilterData)
     const [data, setData] = useState<IFilter[]>([])
 
-    async function getAllCatalogs() {
+    const getAllCatalogs = useCallback(async () => {
         const result = await FilterAPI.getAll()
         setData(result)
-    }
+    }, [modal])
 
     useEffect(() => {
         getAllCatalogs()

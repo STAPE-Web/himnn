@@ -1,27 +1,43 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
 import { IItems } from "@/types"
 import { ItemsAPI } from "@/api"
+import useGlobalStore from "@/store"
 
 const Items = () => {
+    const changeModal = useGlobalStore(state => state.changeModal)
+    const modal = useGlobalStore(state => state.modal)
+    const changeModalMode = useGlobalStore(state => state.changeModalMode)
+    const changeItemData = useGlobalStore(state => state.changeItemData)
     const [data, setData] = useState<IItems[]>([])
 
-    async function getAllCatalogs() {
+    const getAllCatalogs = useCallback(async () => {
         const result = await ItemsAPI.getAll()
         setData(result)
-    }
+    }, [modal])
 
     useEffect(() => {
         getAllCatalogs()
-    }, [])
+    }, [getAllCatalogs])
+
+    async function deleteItem(id: string) {
+        await ItemsAPI.delete(id)
+        getAllCatalogs()
+    }
+
+    function editItem(item: IItems) {
+        changeModal(true)
+        changeModalMode("Items")
+        changeItemData(item)
+    }
 
     return (
         <div className={styles.Filter}>
-            <h1>Категории</h1>
+            <h1>Товары</h1>
 
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>
@@ -35,8 +51,8 @@ const Items = () => {
                     </div>
 
                     <div>
-                        <button className={styles.Edit}><EditIcon /></button>
-                        <button className={styles.Delete}><DeleteIcon /></button>
+                        <button className={styles.Edit} onClick={() => editItem(item)}><EditIcon /></button>
+                        <button className={styles.Delete} onClick={() => deleteItem(item.id)}><DeleteIcon /></button>
                     </div>
                 </div>
             ))}

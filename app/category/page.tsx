@@ -6,9 +6,11 @@ import Layout from "@/components/Layout"
 import styles from "./style.module.css"
 import CategoryItems from "@/components/CategoryItems"
 import CatalogItems from "@/components/CatalogItems"
-import router, { useRouter } from "next/router"
+import { useState } from "react"
 
 const Category = () => {
+  const [filterData, setFilterData] = useState<string[]>([])
+
   const bread = [
     { link: "/", name: "Главная" },
     { link: "/catalog", name: "Каталог" },
@@ -23,10 +25,10 @@ const Category = () => {
         <h2>Асбестотехнические изделия</h2>
 
         <div className={styles.Row}>
-          <Filter />
+          <Filter filterData={filterData} setFilterData={setFilterData} />
 
           <div className={styles.Items}>
-            <CategoryItems />
+            {filterData.length === 0 && <CategoryItems />}
             <CatalogItems />
           </div>
         </div>

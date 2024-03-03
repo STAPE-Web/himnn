@@ -8,6 +8,7 @@ import ButtonDefault from '@/ui/Buttons/Default'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useGlobalStore from '@/store'
+import { ICartItem } from '@/types'
 
 const Header = () => {
     const router = useRouter()
@@ -15,6 +16,10 @@ const Header = () => {
     const changeCall = useGlobalStore(state => state.changeCall)
     const changeMobileMenu = useGlobalStore(state => state.changeMobileMenu)
     const path = usePathname()
+    let cartItems: ICartItem[] = [];
+    if (typeof window !== 'undefined') {
+        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
+    }
 
     return (
         <header className={styles.Header}>
@@ -40,7 +45,13 @@ const Header = () => {
                 <div className={styles.Icons}>
                     <SearchIcon onClick={() => changeSearch(true)} />
                     <BookmarkIcon />
-                    <CartIcon onClick={() => router.push("/cart")} />
+                    {cartItems.length !== 0
+                        ? <div className={styles.CartBox}>
+                            <CartIcon onClick={() => router.push("/cart")} />
+                            <div>{cartItems?.length}</div>
+                        </div>
+                        : <CartIcon onClick={() => router.push("/cart")} />
+                    }
                     <MenuIcon onClick={() => changeMobileMenu(true)} />
                 </div>
             </div>

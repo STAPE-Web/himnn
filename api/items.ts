@@ -3,7 +3,7 @@ import axios from "axios";
 
 class Items {
     async get(id: string) {
-        return await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/categories`, {
+        return await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/items/${id}`, {
             params: {
                 id
             }
@@ -15,13 +15,13 @@ class Items {
     }
 
     async create(data: IItems) {
-        return await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/categories`, {
+        return await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/items`, {
             data
         }).then((res) => res.data)
     }
 
     async delete(id: string) {
-        return await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/categories`, {
+        return await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/items`, {
             params: {
                 id
             }
@@ -29,7 +29,7 @@ class Items {
     }
 
     async update(id: string, data: IItems) {
-        return await axios.put(`${process.env.NEXT_PUBLIC_SERVER}/categories`, {
+        return await axios.put(`${process.env.NEXT_PUBLIC_SERVER}/items`, {
             id, data
         }).then((res) => res.data)
     }

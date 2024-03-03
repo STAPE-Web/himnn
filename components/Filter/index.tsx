@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
 import CheckList from "../CheckList"
 import Calculator from "../Calculator"
 import styles from "./style.module.css"
@@ -9,14 +9,15 @@ import { CloseIcon, FilterIcon } from "@/ui/Icons"
 import { IFilter } from "@/types"
 import { FilterAPI } from "@/api"
 
-const Filter = () => {
-    const itemsArray = ["В наличии (100)"]
-    const sizeArray = ["15 x 15 мм", "16 x 16 мм"]
-    const developerArray = ["Россия", "Китай", "Казахстан"]
+interface Props {
+    filterData: string[]
+    setFilterData: Dispatch<SetStateAction<string[]>>
+}
 
-    const [size, setSize] = useState<string[]>([])
+const Filter: FC<Props> = ({ filterData, setFilterData }) => {
+    const itemsArray = ["В наличии (100)"]
+
     const [items, setItems] = useState<string[]>([])
-    const [developer, setDeveloper] = useState<string[]>([])
 
     const [min, setMin] = useState("10")
     const [max, setMax] = useState("1000")
@@ -24,7 +25,6 @@ const Filter = () => {
     const [active, setActive] = useState(false)
 
     const [data, setData] = useState<IFilter[]>([])
-    console.log(data)
 
     async function getAllCatalogs() {
         const result = await FilterAPI.getAll()
@@ -55,7 +55,7 @@ const Filter = () => {
                 {data.map((item, index) => (
                     <div className={styles.Row} key={index}>
                         <h4>{item.data.title}</h4>
-                        <CheckList array={item.data.array} setValue={setSize} value={size} />
+                        <CheckList array={item.data.array} setValue={setFilterData} value={filterData} />
                     </div>
                 ))}
 

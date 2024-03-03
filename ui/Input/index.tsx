@@ -5,7 +5,7 @@ import styles from "./style.module.css"
 
 interface Props {
     label: string
-    type: "text" | "email" | "tel" | "password"
+    type: "text" | "email" | "tel" | "password" | "number"
     value: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }

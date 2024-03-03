@@ -21,7 +21,7 @@ const Item: FC<Props> = ({ item }) => {
     return (
         <div className={styles.ItemBox}>
             <div
-                onClick={() => router.push("/item")}
+                onClick={() => router.push(`/item/${item.id}`)}
                 onMouseEnter={() => setActive(true)}
                 onMouseLeave={() => setActive(false)}
                 className={`${styles.Item} ${active ? styles.Active : ""}`}

@@ -3,6 +3,7 @@ import styles from './style.module.css'
 import Filter from './Filter'
 import Catalog from './Catalog'
 import Categories from './Categories'
+import Items from './Items'
 
 const Modal = () => {
     const modal = useGlobalStore(state => state.modal)
@@ -14,7 +15,7 @@ const Modal = () => {
             case "Catagories": return <Categories />
             case "Catalog": return <Catalog />
             case "Filter": return <Filter />
-            case "Items": return ""
+            case "Items": return <Items />
         }
     }
 
