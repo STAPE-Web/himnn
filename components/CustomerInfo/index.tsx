@@ -3,16 +3,18 @@
 import ButtonSmall from "@/ui/Buttons/Small"
 import { UserIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
-import { Dispatch, FC, SetStateAction, useState } from "react"
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
 import Checkbox2 from "@/ui/Checkbox2"
 import Input from "@/ui/Input"
 import Textarea from "@/ui/Textarea"
+import { ICartItem, ICheckout } from "@/types"
 
 interface Props {
     setActiveorder: Dispatch<SetStateAction<boolean>>
+    setData: Dispatch<SetStateAction<ICheckout>>
 }
 
-const CustomerInfo: FC<Props> = ({ setActiveorder }) => {
+const CustomerInfo: FC<Props> = ({ setActiveorder, setData }) => {
     const [active, setActive] = useState(false)
     const [fullname, setFullname] = useState("")
     const [email, setEmail] = useState("")
@@ -30,6 +32,16 @@ const CustomerInfo: FC<Props> = ({ setActiveorder }) => {
     const [city, setCity] = useState("")
     const [corespondentAccount, setCorespondentAccount] = useState("")
     const [contactPerson, setContactPerson] = useState("")
+    let cartItems: ICartItem[] = [];
+    if (typeof window !== 'undefined') {
+        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
+    }
+
+    useEffect(() => {
+        setData({
+            address, bank, BIK, checkingAccount, city, comment, companyName, contactPerson, corespondentAccount, email, fullname, INN, items: cartItems, KPP, phone, state
+        })
+    }, [address, bank, BIK, checkingAccount, city, comment, companyName, contactPerson, corespondentAccount, email, fullname, INN, cartItems, KPP, phone, state])
 
     return (
         <div className={`${styles.CustomerInfo} ${active ? styles.Active : ""}`}>

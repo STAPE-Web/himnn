@@ -63,3 +63,22 @@ export type ICartItem = {
     count: number,
     id: string
 }
+
+export type ICheckout = {
+    items: ICartItem[]
+    state: boolean
+    fullname: string
+    email: string
+    phone: string
+    comment: string
+    companyName: string
+    address: string
+    INN: string
+    KPP: string
+    BIK: string
+    checkingAccount: string
+    bank: string
+    city: string
+    corespondentAccount: string
+    contactPerson: string
+}
