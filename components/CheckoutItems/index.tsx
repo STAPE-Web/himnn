@@ -1,3 +1,5 @@
+"use client"
+
 import { ICartItem } from "@/types";
 import styles from "./style.module.css"
 import CheckoutItem from "@/ui/CheckoutItem"

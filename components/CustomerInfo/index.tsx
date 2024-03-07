@@ -3,12 +3,16 @@
 import ButtonSmall from "@/ui/Buttons/Small"
 import { UserIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
-import { useState } from "react"
+import { Dispatch, FC, SetStateAction, useState } from "react"
 import Checkbox2 from "@/ui/Checkbox2"
 import Input from "@/ui/Input"
 import Textarea from "@/ui/Textarea"
 
-const CustomerInfo = () => {
+interface Props {
+    setActiveorder: Dispatch<SetStateAction<boolean>>
+}
+
+const CustomerInfo: FC<Props> = ({ setActiveorder }) => {
     const [active, setActive] = useState(false)
     const [fullname, setFullname] = useState("")
     const [email, setEmail] = useState("")
@@ -81,7 +85,15 @@ const CustomerInfo = () => {
             </div>
 
             <div className={styles.ButtonBox}>
-                <ButtonSmall onClick={() => setActive(false)}>Далее</ButtonSmall>
+                <ButtonSmall onClick={() => {
+                    if (state) {
+                        setActiveorder(fullname !== "" && email !== "" && phone !== "")
+                        if (fullname !== "" && email !== "" && phone !== "") setActive(false)
+                    } else {
+                        setActiveorder(companyName !== "" && email !== "" && phone !== "" && INN !== "")
+                        if (companyName !== "" && email !== "" && phone !== "" && INN !== "") setActive(false)
+                    }
+                }}>Далее</ButtonSmall>
             </div>
         </div>
     )

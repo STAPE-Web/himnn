@@ -29,6 +29,24 @@
     gap: 12px;
 }
 
+.Checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.ActiveOrder {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.ActiveOrder button {
+    width: fit-content;
+}
+
 @media screen and (max-width: 1300px) {
     .Section {
         padding: 0 15px;
