@@ -3,7 +3,7 @@ export type ICatalog = {
     data: {
         image: string
         text: string
-        timestamp: any
+        timestamp?: any
         title: string
     }
 }
@@ -30,7 +30,7 @@ export type IItems = {
             description: string,
             title: string
         },
-        timestamp: any
+        timestamp?: any
         category: string,
         subcategory: string
     }
@@ -43,7 +43,7 @@ export type ICategory = {
         text: string,
         title: string,
         category: string,
-        timestamp: any
+        timestamp?: any
     }
 }
 
@@ -52,7 +52,7 @@ export type IFilter = {
     data: {
         array: string[],
         title: string,
-        timestamp: any
+        timestamp?: any
     }
 }
 

@@ -9,6 +9,7 @@ const Catalog = () => {
     const catalogData = useGlobalStore(state => state.catalogData)
     const changeCatalogData = useGlobalStore(state => state.changeCatalogData)
     const changeModal = useGlobalStore(state => state.changeModal)
+    const modalMode = useGlobalStore(state => state.modalMode)
 
     function handleInput(type: "title" | "text", value: string) {
         if (catalogData !== null) {
@@ -24,6 +25,13 @@ const Catalog = () => {
         }
     }
 
+    async function CreateItem() {
+        if (catalogData !== null) {
+            await CatalogAPI.create(catalogData)
+            changeModal(false)
+        }
+    }
+
     return (
         <div className={styles.Box} onClick={e => e.stopPropagation()}>
             <div className={styles.Row}>
@@ -33,7 +41,10 @@ const Catalog = () => {
             <div className={styles.List}>
                 <Input label="Название" onChange={e => handleInput("title", e.target.value)} type="text" value={catalogData?.data.title || ""} />
                 <Textarea label="Описание" onChange={e => handleInput("text", e.target.value)} value={catalogData?.data.text || ""} />
-                <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                {modalMode === "AddCatalog"
+                    ? <ButtonDefault onClick={() => CreateItem()}>Создать</ButtonDefault>
+                    : <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                }
             </div>
         </div>
     )

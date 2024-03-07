@@ -31,6 +31,11 @@ const SearchBox = () => {
                 router.push(`/item/${item.id}`)
                 changeSearch(false)
             }
+
+            if (item.data.title.toLowerCase().includes(value.toLowerCase())) {
+                router.push(`/item/${item.id}`)
+                changeSearch(false)
+            }
         })
     }
 

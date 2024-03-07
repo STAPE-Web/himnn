@@ -3,20 +3,13 @@
 import Image from "next/image"
 import { FC } from "react"
 import styles from "./style.module.css"
-
-type ICartItem = {
-    image: string
-    title: string
-    price: number
-    count: number
-}
+import { ICartItem } from "@/types"
 
 interface Props {
     item: ICartItem
 }
 
 const CheckoutItem: FC<Props> = ({ item }) => {
-
     return (
         <>
             <div className={styles.Item}>

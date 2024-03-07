@@ -16,7 +16,7 @@ class Items {
 
     async create(data: IItems) {
         return await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/items`, {
-            data
+            data: data.data
         }).then((res) => res.data)
     }
 

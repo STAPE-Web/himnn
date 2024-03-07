@@ -10,6 +10,7 @@ const Items = () => {
     const itemData = useGlobalStore(state => state.itemData)
     const changeitemData = useGlobalStore(state => state.changeItemData)
     const changeModal = useGlobalStore(state => state.changeModal)
+    const modalMode = useGlobalStore(state => state.modalMode)
 
     function handleInput(type: "title" | "text" | "artikul" | "price" | "subcategory" | "category", value: string) {
         if (itemData !== null) {
@@ -47,6 +48,13 @@ const Items = () => {
         }
     }
 
+    async function CreateItem() {
+        if (itemData !== null) {
+            await ItemsAPI.create(itemData)
+            changeModal(false)
+        }
+    }
+
     return (
         <div className={styles.Box} onClick={e => e.stopPropagation()}>
             {itemData !== null && <>
@@ -62,9 +70,9 @@ const Items = () => {
                     <Input label="Название" onChange={e => handleInput("title", e.target.value)} type="text" value={itemData?.data.title || ""} />
                     <Input label="Артикул" onChange={e => handleInput("artikul", e.target.value)} type="number" value={itemData?.data.artikul || ""} />
                     <Input label="Цена" onChange={e => handleInput("price", e.target.value)} type="number" value={String(itemData?.data.price) || ""} />
-                    <Input label="Категория" onChange={e => handleInput("title", e.target.value)} type="text" value={itemData?.data.title || ""} />
+                    <Input label="Категория" onChange={e => handleInput("category", e.target.value)} type="text" value={itemData?.data.category || ""} />
                     <Input label="Подкатегория" onChange={e => handleInput("subcategory", e.target.value)} type="text" value={itemData?.data.subcategory || ""} />
-                    <Textarea label="Описание" onChange={e => handleInput("category", e.target.value)} value={itemData?.data.category || ""} />
+                    <Textarea label="Описание" onChange={e => handleInput("text", e.target.value)} value={itemData?.data.text || ""} />
 
                     <h3>Дополнительно</h3>
                     <Input label="Страна производитель" onChange={e => handleAdditional("creator", e.target.value)} type="text" value={itemData?.data.additional.creator || ""} />
@@ -77,7 +85,10 @@ const Items = () => {
                 </div>
 
                 <div className={styles.Button}>
-                    <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                    {modalMode === "AddItems"
+                        ? <ButtonDefault onClick={() => CreateItem()}>Создать</ButtonDefault>
+                        : <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                    }
                 </div>
             </>}
         </div>

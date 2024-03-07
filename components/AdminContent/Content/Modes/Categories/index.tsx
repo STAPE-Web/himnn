@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
-import { DeleteIcon, EditIcon } from "@/ui/Icons"
+import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
 import { ICategory } from "@/types"
 import { CategoriesAPI } from "@/api"
@@ -35,9 +35,18 @@ const Categories = () => {
         changeCategoryData(item)
     }
 
+    function addItem() {
+        changeModal(true)
+        changeModalMode("AddCatagories")
+        changeCategoryData({ id: "", data: { image: "/Home_Item_4.png", text: "", title: "", category: "" } })
+    }
+
     return (
         <div className={styles.Filter}>
-            <h1>Категории</h1>
+            <div className={styles.TopRow}>
+                <h1>Категории</h1>
+                <button onClick={() => addItem()}><AddIcon /></button>
+            </div>
 
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>

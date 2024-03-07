@@ -14,7 +14,6 @@ const Category = () => {
   const bread = [
     { link: "/", name: "Главная" },
     { link: "/catalog", name: "Каталог" },
-    { link: "", name: "" },
   ]
 
   return (

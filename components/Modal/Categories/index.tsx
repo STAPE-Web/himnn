@@ -9,6 +9,7 @@ const Category = () => {
     const categoryData = useGlobalStore(state => state.categoryData)
     const changeCategoryData = useGlobalStore(state => state.changeCategoryData)
     const changeModal = useGlobalStore(state => state.changeModal)
+    const modalMode = useGlobalStore(state => state.modalMode)
 
     function handleInput(type: "title" | "text" | "category", value: string) {
         if (categoryData !== null) {
@@ -25,6 +26,13 @@ const Category = () => {
         }
     }
 
+    async function CreateItem() {
+        if (categoryData !== null) {
+            await CategoriesAPI.create(categoryData)
+            changeModal(false)
+        }
+    }
+
     return (
         <div className={styles.Box} onClick={e => e.stopPropagation()}>
             <div className={styles.Row}>
@@ -35,7 +43,10 @@ const Category = () => {
                 <Input label="Название" onChange={e => handleInput("title", e.target.value)} type="text" value={categoryData?.data.title || ""} />
                 <Input label="Категория" onChange={e => handleInput("category", e.target.value)} type="text" value={categoryData?.data.category || ""} />
                 <Textarea label="Описание" onChange={e => handleInput("text", e.target.value)} value={categoryData?.data.text || ""} />
-                <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                {modalMode === "AddCatagories"
+                    ? <ButtonDefault onClick={() => CreateItem()}>Создать</ButtonDefault>
+                    : <ButtonDefault onClick={() => updateItem()}>Сохранить</ButtonDefault>
+                }
             </div>
         </div>
     )

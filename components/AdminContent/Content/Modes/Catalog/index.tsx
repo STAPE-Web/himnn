@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
-import { DeleteIcon, EditIcon } from "@/ui/Icons"
+import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
 import { ICatalog } from "@/types"
 import { CatalogAPI } from "@/api"
@@ -35,9 +35,18 @@ const Catalog = () => {
         changeCatalogData(item)
     }
 
+    function addItem() {
+        changeModal(true)
+        changeModalMode("AddCatalog")
+        changeCatalogData({ id: "", data: { image: "/Home_Item_1.png", text: "", title: "" } })
+    }
+
     return (
         <div className={styles.Filter}>
-            <h1>Каталог</h1>
+            <div className={styles.TopRow}>
+                <h1>Каталог</h1>
+                <button onClick={() => addItem()}><AddIcon /></button>
+            </div>
 
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>

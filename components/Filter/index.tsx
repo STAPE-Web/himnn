@@ -61,7 +61,7 @@ const Filter: FC<Props> = ({ filterData, setFilterData }) => {
 
                 <div className={styles.Buttons}>
                     <ButtonSmall onClick={() => ({})}>Показать</ButtonSmall>
-                    <button className={styles.ClearButton}>
+                    <button className={styles.ClearButton} onClick={() => setFilterData([])}>
                         <CloseIcon />
                         <p>Сбросить</p>
                     </button>

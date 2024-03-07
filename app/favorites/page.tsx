@@ -1,20 +1,20 @@
 "use client"
 
 import Bread from "@/components/Bread"
-import CartItems from "@/components/CartItems"
 import Layout from "@/components/Layout"
 import { CloseIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import ButtonSmall from "@/ui/Buttons/Small"
 import { useRouter } from "next/navigation"
 import { ICartItem } from "@/types"
+import FavoriteItems from "@/components/FavoriteItems"
 
 const Cart = () => {
   const router = useRouter()
 
   const bread = [
     { link: "/", name: "Главная" },
-    { link: "/cart", name: "Корзина" },
+    { link: "/favorites", name: "Избранное" },
   ]
 
   let cartItems: ICartItem[] = [];
@@ -25,7 +25,7 @@ const Cart = () => {
   }
 
   function clearItems() {
-    localStorage.removeItem('cartItems');
+    localStorage.removeItem('favoriteItems');
     window.location.reload()
   }
 
@@ -35,12 +35,12 @@ const Cart = () => {
     <Layout>
       <section className={styles.Section}>
         <Bread array={bread} />
-        <h2>Корзина</h2>
+        <h2>Избранное</h2>
 
         <div className={styles.Box}>
           <div className={styles.Buttons}>
-            <button>Заказ ({cartItems.length})</button>
-            <button onClick={() => router.push("/favorites")}>Избранное ({favoriteItems.length})</button>
+            <button onClick={() => router.push("/cart")}>Заказ ({cartItems.length})</button>
+            <button>Избранное ({favoriteItems.length})</button>
           </div>
 
           <button className={styles.ClearButton} onClick={() => clearItems()}>
@@ -49,7 +49,7 @@ const Cart = () => {
           </button>
         </div>
 
-        <CartItems />
+        <FavoriteItems />
 
         <div className={styles.Contolls}>
           <div>

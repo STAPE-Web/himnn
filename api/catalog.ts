@@ -14,9 +14,9 @@ class Catalog {
         return await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/catalog`).then((res) => res.data)
     }
 
-    async create(data: IItems) {
+    async create(data: ICatalog) {
         return await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/catalog`, {
-            data
+            data: data.data
         }).then((res) => res.data)
     }
 

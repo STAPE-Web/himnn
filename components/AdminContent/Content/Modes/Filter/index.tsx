@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
-import { DeleteIcon, EditIcon } from "@/ui/Icons"
+import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import useGlobalStore from "@/store"
 import { IFilter } from "@/types"
 import { FilterAPI } from "@/api"
@@ -34,9 +34,18 @@ const Filter = () => {
         changeFilterData(item)
     }
 
+    function addItem() {
+        changeModal(true)
+        changeModalMode("AddFilter")
+        changeFilterData({ id: "", data: { array: [], title: "", } })
+    }
+
     return (
         <div className={styles.Filter}>
-            <h1>Фильтр</h1>
+            <div className={styles.TopRow}>
+                <h1>Фильтр</h1>
+                <button onClick={() => addItem()}><AddIcon /></button>
+            </div>
 
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>

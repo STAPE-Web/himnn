@@ -18,7 +18,7 @@ const useGlobalStore = create<State>()(devtools((set) => ({
     changeCall: (value: boolean) => set({ call: value }),
     changeMobileMenu: (value: boolean) => set({ mobileMneu: value }),
     changeModal: (value: boolean) => set({ modal: value }),
-    changeModalMode: (value: "Filter" | "Catalog" | "Catagories" | "Items") => set({ modalMode: value }),
+    changeModalMode: (value: "Filter" | "Catalog" | "Catagories" | "Items" | "AddFilter" | "AddCatalog" | "AddCatagories" | "AddItems") => set({ modalMode: value }),
     changeFilterData: (value: IFilter) => set({ filterData: value }),
     changeCatalogData: (value: ICatalog) => set({ catalogData: value }),
     changeCategoryData: (value: ICategory) => set({ categoryData: value }),

@@ -69,3 +69,33 @@
     color: #fff;
     opacity: 0.7;
 }
+
+.TopRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.TopRow button {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background: #00c925;
+    transition: 0.5s;
+}
+
+.TopRow button:hover {
+    opacity: 0.7;
+}
+
+.TopRow button svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}

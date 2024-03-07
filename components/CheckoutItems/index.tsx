@@ -1,11 +1,12 @@
+import { ICartItem } from "@/types";
 import styles from "./style.module.css"
 import CheckoutItem from "@/ui/CheckoutItem"
 
 const CheckoutItems = () => {
-    const items = [
-        { image: "/Item.png", title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", price: 1190.13, count: 1 },
-        { image: "/Item.png", title: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80", price: 1190.13, count: 1 },
-    ]
+    let cartItems: ICartItem[] = [];
+    if (typeof window !== 'undefined') {
+        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
+    }
 
     return (
         <div className={styles.CheckoutItems}>
@@ -19,7 +20,7 @@ const CheckoutItems = () => {
             </div>
 
             <div className={styles.List}>
-                {items.map((item, index) => (
+                {cartItems.map((item, index) => (
                     <CheckoutItem key={index} item={item} />
                 ))}
             </div>

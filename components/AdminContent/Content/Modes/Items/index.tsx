@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
-import { DeleteIcon, EditIcon } from "@/ui/Icons"
+import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
 import { IItems } from "@/types"
 import { ItemsAPI } from "@/api"
@@ -35,9 +35,18 @@ const Items = () => {
         changeItemData(item)
     }
 
+    function addItem() {
+        changeModal(true)
+        changeModalMode("AddItems")
+        changeItemData({ id: "", data: { image: "/Item.png", text: "", title: "", additional: { creator: "", height: 0, mark: "", standart: "", thickness: 0, weight: 0, width: 0 }, artikul: "", category: "", inStock: true, price: 0, seo: { description: "", title: "" }, subcategory: "" } })
+    }
+
     return (
         <div className={styles.Filter}>
-            <h1>Товары</h1>
+            <div className={styles.TopRow}>
+                <h1>Товары</h1>
+                <button onClick={() => addItem()}><AddIcon /></button>
+            </div>
 
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>

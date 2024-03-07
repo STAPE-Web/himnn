@@ -17,8 +17,10 @@ const Header = () => {
     const changeMobileMenu = useGlobalStore(state => state.changeMobileMenu)
     const path = usePathname()
     let cartItems: ICartItem[] = [];
+    let favoriteItems: ICartItem[] = [];
     if (typeof window !== 'undefined') {
         cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
+        favoriteItems = JSON.parse(localStorage.getItem('favoriteItems') as string) || [];
     }
 
     return (
@@ -44,7 +46,13 @@ const Header = () => {
 
                 <div className={styles.Icons}>
                     <SearchIcon onClick={() => changeSearch(true)} />
-                    <BookmarkIcon />
+                    {favoriteItems.length !== 0
+                        ? <div className={styles.CartBox}>
+                            <BookmarkIcon onClick={() => router.push("/favorites")} />
+                            <div>{favoriteItems?.length}</div>
+                        </div>
+                        : <BookmarkIcon onClick={() => router.push("/favorites")} />
+                    }
                     {cartItems.length !== 0
                         ? <div className={styles.CartBox}>
                             <CartIcon onClick={() => router.push("/cart")} />

@@ -17,6 +17,8 @@
     border: 0.3px solid transparent;
     transition: 0.5s;
     z-index: 10;
+    position: relative;
+    user-select: none;
 }
 
 .Item img {
@@ -97,4 +99,18 @@
 
 .Item.Leave {
     position: absolute;
+}
+
+.BookmarkIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.BookmarkIcon.ActiveIcon {
+    opacity: 1;
 }

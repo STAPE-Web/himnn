@@ -16,7 +16,7 @@ class Filter {
 
     async create(data: IFilter) {
         return await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/filter`, {
-            data
+            data: data.data
         }).then((res) => res.data)
     }
 

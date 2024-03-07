@@ -11,7 +11,7 @@ import styles from "../style.module.css"
 import More from "@/ui/More"
 import Tabs from "@/components/Tabs"
 import Additional from "@/components/Additional"
-import { IItems } from "@/types"
+import { ICartItem, IItems } from "@/types"
 import { ItemsAPI } from "@/api"
 import InStock from "@/components/InStock"
 
@@ -44,23 +44,31 @@ function ItemPage({ params }: any) {
     }, [getData])
 
     function addToCart() {
-        const cartItems = JSON.parse(localStorage.getItem("cartItems") as string)
+        const cartItems: ICartItem[] = JSON.parse(localStorage.getItem("cartItems") as string);
         const objData = {
             image: data?.data.image,
             title: data?.data.title,
             price: data?.data.price,
             count,
             id: data?.id
-        }
+        };
 
         if (cartItems === null) {
-            localStorage.setItem("cartItems", JSON.stringify([objData]))
-            window.location.reload()
+            localStorage.setItem("cartItems", JSON.stringify([objData]));
+            window.location.reload();
         } else {
-            localStorage.setItem("cartItems", JSON.stringify([...cartItems, objData]))
-            window.location.reload()
+            const existingItemIndex = cartItems.findIndex(i => i.id === objData.id);
+            if (existingItemIndex !== -1) {
+                cartItems[existingItemIndex].count = Number(cartItems[existingItemIndex].count) + Number(count);
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                window.location.reload();
+            } else {
+                localStorage.setItem("cartItems", JSON.stringify([...cartItems, objData]));
+                window.location.reload();
+            }
         }
     }
+
 
     function fillTabs() {
         if (data !== null) {

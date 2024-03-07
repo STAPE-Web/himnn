@@ -13,9 +13,13 @@ const Modal = () => {
     function fillContent() {
         switch (modalMode) {
             case "Catagories": return <Categories />
+            case "AddCatagories": return <Categories />
             case "Catalog": return <Catalog />
+            case "AddCatalog": return <Catalog />
             case "Filter": return <Filter />
+            case "AddFilter": return <Filter />
             case "Items": return <Items />
+            case "AddItems": return <Items />
         }
     }
 
