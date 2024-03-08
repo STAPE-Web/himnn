@@ -6,7 +6,7 @@ import Layout from "@/components/Layout"
 import styles from "./style.module.css"
 import CategoryItems from "@/components/CategoryItems"
 import CatalogItems from "@/components/CatalogItems"
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from 'next/navigation'
 
 const Category = () => {
@@ -34,20 +34,22 @@ const Category = () => {
 
   return (
     <Layout>
-      <section className={styles.Section}>
-        <Bread array={bread} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <section className={styles.Section}>
+          <Bread array={bread} />
 
-        <h2>{categoryTitle}</h2>
+          <h2>{categoryTitle}</h2>
 
-        <div className={styles.Row}>
-          <Filter filterData={filterData} setFilterData={setFilterData} max={max} min={min} setMax={setMax} setMin={setMin} items={items} setItems={setItems} />
+          <div className={styles.Row}>
+            <Filter filterData={filterData} setFilterData={setFilterData} max={max} min={min} setMax={setMax} setMin={setMin} items={items} setItems={setItems} />
 
-          <div className={styles.Items}>
-            {filterData.length === 0 && <CategoryItems category={category} subcategory={subcategory} />}
-            <CatalogItems category={category} subcategory={subcategory} filterData={filterData} items={items} min={min} max={max} />
+            <div className={styles.Items}>
+              {filterData.length === 0 && <CategoryItems category={category} subcategory={subcategory} />}
+              <CatalogItems category={category} subcategory={subcategory} filterData={filterData} items={items} min={min} max={max} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Suspense>
     </Layout>
   )
 }
