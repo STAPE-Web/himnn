@@ -6,8 +6,7 @@ import Layout from "@/components/Layout"
 import styles from "./style.module.css"
 import CategoryItems from "@/components/CategoryItems"
 import CatalogItems from "@/components/CatalogItems"
-import { Suspense, useState } from "react"
-import { useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from "react"
 
 const Category = () => {
   const [filterData, setFilterData] = useState<string[]>([])
@@ -15,11 +14,20 @@ const Category = () => {
   const [min, setMin] = useState("10")
   const [max, setMax] = useState("1000")
 
-  const searchParams = useSearchParams()
-  const category = searchParams.get('c') || ""
-  const subcategory = searchParams.get('sub') || ""
-  const categoryTitle = category ? category.replace(/-/g, ' ') : ""
-  const subcategoryTitle = subcategory ? subcategory.replace(/-/g, ' ') : ""
+  const [category, setCategory] = useState("")
+  const [subcategory, setsubcategory] = useState("")
+  const [categoryTitle, setcategoryTitle] = useState("")
+  const [subcategoryTitle, setsubcategoryTitle] = useState("")
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search);
+      setCategory(searchParams.get('c') || "")
+      setsubcategory(searchParams.get('sub') || "")
+      setcategoryTitle(category ? category.replace(/-/g, ' ') : "")
+      setsubcategoryTitle(subcategory ? subcategory.replace(/-/g, ' ') : "")
+    }
+  }, [category, subcategory])
 
   const bread = subcategory === "" ? [
     { link: "/", name: "Главная" },
@@ -44,8 +52,8 @@ const Category = () => {
             <Filter filterData={filterData} setFilterData={setFilterData} max={max} min={min} setMax={setMax} setMin={setMin} items={items} setItems={setItems} />
 
             <div className={styles.Items}>
-              {filterData.length === 0 && <CategoryItems category={category} subcategory={subcategory} />}
-              <CatalogItems category={category} subcategory={subcategory} filterData={filterData} items={items} min={min} max={max} />
+              {filterData.length === 0 && <CategoryItems category={category as string} subcategory={subcategory as string} />}
+              <CatalogItems category={category as string} subcategory={subcategory as string} filterData={filterData} items={items} min={min} max={max} />
             </div>
           </div>
         </section>
