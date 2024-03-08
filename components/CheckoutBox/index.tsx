@@ -2,8 +2,10 @@
 
 import { ICartItem } from "@/types";
 import styles from "./style.module.css"
+import { useRouter } from "next/navigation";
 
 const CheckoutBox = () => {
+    const router = useRouter()
     let cartItems: ICartItem[] = [];
     if (typeof window !== 'undefined') {
         cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
@@ -15,14 +17,14 @@ const CheckoutBox = () => {
         <div className={styles.CheckoutBox}>
             <div className={styles.Row}>
                 <h4>Ваш заказ</h4>
-                <button>Изменить</button>
+                <button onClick={() => router.push("/cart")}>Изменить</button>
             </div>
 
             <div className={styles.Row}>
                 <div className={styles.Column}>
                     <div className={styles.Fill}>
                         <p>Сумма:</p>
-                        <p>{summ} руб.</p>
+                        <p>{summ.toFixed(2)} руб.</p>
                     </div>
 
                     <div className={styles.Fill}>
@@ -34,7 +36,7 @@ const CheckoutBox = () => {
 
             <div className={styles.Row}>
                 <h4>Итого:</h4>
-                <h4>{summ + 100} руб.</h4>
+                <h4>{(summ + 100).toFixed(2)} руб.</h4>
             </div>
         </div>
     )

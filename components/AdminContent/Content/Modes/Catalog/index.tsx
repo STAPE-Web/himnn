@@ -38,13 +38,13 @@ const Catalog = () => {
     function addItem() {
         changeModal(true)
         changeModalMode("AddCatalog")
-        changeCatalogData({ id: "", data: { image: "/Home_Item_1.png", text: "", title: "" } })
+        changeCatalogData({ id: "", data: { image: "/Home_Item_1.png", text: "", title: "", seo: { description: "", title: "" } } })
     }
 
     return (
         <div className={styles.Filter}>
             <div className={styles.TopRow}>
-                <h1>Каталог</h1>
+                <h1>Категории</h1>
                 <button onClick={() => addItem()}><AddIcon /></button>
             </div>
 
@@ -55,7 +55,6 @@ const Catalog = () => {
 
                         <div className={styles.Data}>
                             <h3>{item.data.title}</h3>
-                            <p>{item.data.text}</p>
                         </div>
                     </div>
 

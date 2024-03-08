@@ -14,6 +14,10 @@
     color: #4E4E4E;
 }
 
+.Section h2::first-letter {
+    text-transform: uppercase;
+}
+
 .Row {
     display: flex;
     align-items: flex-start;

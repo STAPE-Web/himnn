@@ -4,6 +4,7 @@ import { useState } from "react"
 import styles from "./style.module.css"
 import useGlobalStore from "@/store"
 import Checkbox from "@/ui/Checkbox"
+import { CheckoutAPI } from "@/api"
 
 const OrderCall = () => {
     const [fullName, setFullname] = useState("")
@@ -13,6 +14,12 @@ const OrderCall = () => {
 
     const call = useGlobalStore(state => state.call)
     const changeCall = useGlobalStore(state => state.changeCall)
+
+    async function createCall() {
+        changeCall(false)
+        alert("Заявка отправлена")
+        await CheckoutAPI.call({ email, fullName, tel })
+    }
 
     return (
         <div className={`${styles.Modal} ${call ? styles.Active : ""}`} onClick={() => changeCall(false)}>
@@ -25,7 +32,7 @@ const OrderCall = () => {
                     <Input label="Ф.И.О." onChange={e => setFullname(e.target.value)} type="text" value={fullName} />
                     <Input label="Номер телефона" onChange={e => setTel(e.target.value)} type="tel" value={tel} />
                     <Input label="E-mail" onChange={e => setEmail(e.target.value)} type="email" value={email} />
-                    <ButtonDefault onClick={() => ({})}>Отправить</ButtonDefault>
+                    <ButtonDefault onClick={() => createCall()}>Отправить</ButtonDefault>
 
                     <div className={styles.Accept} onClick={() => setAccept(!accept)}>
                         <Checkbox state={accept} />

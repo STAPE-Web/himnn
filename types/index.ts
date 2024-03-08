@@ -5,6 +5,10 @@ export type ICatalog = {
         text: string
         timestamp?: any
         title: string
+        seo: {
+            title: string
+            description: string
+        }
     }
 }
 
@@ -44,6 +48,10 @@ export type ICategory = {
         title: string,
         category: string,
         timestamp?: any
+        seo: {
+            description: string,
+            title: string
+        }
     }
 }
 

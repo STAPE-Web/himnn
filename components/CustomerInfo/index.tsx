@@ -41,7 +41,7 @@ const CustomerInfo: FC<Props> = ({ setActiveorder, setData }) => {
         setData({
             address, bank, BIK, checkingAccount, city, comment, companyName, contactPerson, corespondentAccount, email, fullname, INN, items: cartItems, KPP, phone, state
         })
-    }, [address, bank, BIK, checkingAccount, city, comment, companyName, contactPerson, corespondentAccount, email, fullname, INN, cartItems, KPP, phone, state])
+    }, [address, bank, BIK, checkingAccount, city, comment, companyName, contactPerson, corespondentAccount, email, fullname, INN, KPP, phone, state])
 
     return (
         <div className={`${styles.CustomerInfo} ${active ? styles.Active : ""}`}>

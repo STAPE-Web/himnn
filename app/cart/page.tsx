@@ -8,9 +8,13 @@ import styles from "./style.module.css"
 import ButtonSmall from "@/ui/Buttons/Small"
 import { useRouter } from "next/navigation"
 import { ICartItem } from "@/types"
+import { useEffect } from "react"
+import useGlobalStore from "@/store"
 
 const Cart = () => {
   const router = useRouter()
+  const changeCartData = useGlobalStore(state => state.changeCartData)
+  const cartData = useGlobalStore(state => state.cartData)
 
   const bread = [
     { link: "/", name: "Главная" },
@@ -29,7 +33,11 @@ const Cart = () => {
     window.location.reload()
   }
 
-  const summ = cartItems.reduce((acc, item) => acc + (Number(item.count) * Number(item.price)), 0);
+  const summ = cartData.reduce((acc, item) => acc + (Number(item.count) * Number(item.price)), 0);
+
+  useEffect(() => {
+    changeCartData(cartItems)
+  }, [])
 
   return (
     <Layout>
@@ -39,7 +47,7 @@ const Cart = () => {
 
         <div className={styles.Box}>
           <div className={styles.Buttons}>
-            <button>Заказ ({cartItems.length})</button>
+            <button>Заказ ({cartData.length})</button>
             <button onClick={() => router.push("/favorites")}>Избранное ({favoriteItems.length})</button>
           </div>
 

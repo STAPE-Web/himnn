@@ -16,6 +16,10 @@
     display: none;
 }
 
+.Bread div a::first-letter {
+    text-transform: uppercase;
+}
+
 @media screen and (max-width: 750px) {
     .Bread {
         display: none;

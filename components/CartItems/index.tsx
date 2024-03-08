@@ -1,12 +1,10 @@
 import CartItem from "@/ui/CartItem"
 import styles from "./style.module.css"
 import { ICartItem } from "@/types"
+import useGlobalStore from "@/store"
 
 const CartItems = () => {
-    let cartItems: ICartItem[] = [];
-    if (typeof window !== 'undefined') {
-        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
-    }
+    const cartItems = useGlobalStore(state => state.cartData)
 
     return (
         <div className={styles.CartItems}>

@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
+    "firebase": "^10.8.1",
     "google-translate-api": "^2.3.0",
     "multi-range-slider-react": "^2.0.7",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-input-mask": "^2.0.4",
     "react-slick": "^0.30.1",
     "slick-carousel": "^1.8.1",
     "zustand": "^4.5.0"
@@ -24,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-input-mask": "^3.0.5",
     "@types/react-slick": "^0.23.13",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",

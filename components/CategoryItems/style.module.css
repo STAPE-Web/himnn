@@ -5,6 +5,10 @@
     gap: 24px;
 }
 
+.Hidden {
+    display: none;
+}
+
 .Item {
     width: 100%;
     background: #fff;

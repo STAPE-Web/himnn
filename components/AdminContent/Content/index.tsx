@@ -8,15 +8,15 @@ import Categories from "./Modes/Categories"
 import Catalog from "./Modes/Catalog"
 
 interface Props {
-    state: "Фильтр" | "Каталог" | "Категории" | "Товары"
+    state: "Фильтр" | "Категории" | "Подкатегории" | "Товары"
 }
 
 const Content: FC<Props> = ({ state }) => {
     function fillContent() {
         switch (state) {
             case "Фильтр": return <Filter />
-            case "Каталог": return <Catalog />
-            case "Категории": return <Categories />
+            case "Категории": return <Catalog />
+            case "Подкатегории": return <Categories />
             case "Товары": return <Items />
         }
     }

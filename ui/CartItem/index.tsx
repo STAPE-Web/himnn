@@ -6,35 +6,40 @@ import { FC, useState } from "react"
 import { CloseIcon } from "../Icons"
 import styles from "./style.module.css"
 import { ICartItem } from "@/types"
+import useGlobalStore from "@/store"
+import { useRouter } from "next/navigation"
 
 interface Props {
     item: ICartItem
 }
 
 const CartItem: FC<Props> = ({ item }) => {
+    const cartItems = useGlobalStore(state => state.cartData)
+    const changeCartData = useGlobalStore(state => state.changeCartData)
+    const router = useRouter()
+
     function removeFromCart() {
-        const cartItems: ICartItem[] = JSON.parse(localStorage.getItem("cartItems") as string)
+        changeCartData(cartItems.filter(i => i.id !== item.id))
         localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(i => i.id !== item.id)))
-        window.location.reload()
     }
 
     function CountChanges(count: string) {
-        const newItem: ICartItem = { ...item, count: Number(count) };
-        const cartItems: ICartItem[] = JSON.parse(localStorage.getItem("cartItems") as string);
-        const index = cartItems.findIndex(cartItem => cartItem.id === newItem.id);
-        if (index !== -1) {
-            cartItems[index] = newItem;
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            window.location.reload();
-        } else {
-            console.error("Item not found in cartItems array.");
-        }
+        const newCount = Number(count);
+        const updatedCartItems = cartItems.map(cartItem => {
+            if (cartItem.id === item.id) {
+                return { ...cartItem, count: newCount };
+            }
+            return cartItem;
+        });
+
+        changeCartData(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     }
 
     return (
         <>
             <div className={styles.Item}>
-                <div className={styles.Fill}>
+                <div className={styles.Fill} onClick={() => router.push(`/item/${item.id}`)}>
                     <Image src={item.image} width={220} height={150} alt="" />
                     <p>{item.title}</p>
                 </div>

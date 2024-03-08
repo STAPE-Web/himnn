@@ -1,6 +1,6 @@
 .ItemBox {
     position: relative;
-    width: 100%;
+    width: 282.66px;
     height: 100%;
 }
 
@@ -31,6 +31,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
 .Box h3 {
@@ -38,6 +39,7 @@
     font-size: 16px;
     line-height: 140%;
     text-align: center;
+    min-width: 100%;
 }
 
 .Available {
@@ -69,6 +71,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: 700;
+    width: 100%;
 }
 
 .Controlls {
@@ -95,10 +98,14 @@
 .Item.Active {
     border-color: #BEBEBE;
     position: absolute;
+    width: 100%;
+    z-index: 100;
 }
 
 .Item.Leave {
     position: absolute;
+    width: 100%;
+    z-index: 100;
 }
 
 .BookmarkIcon {

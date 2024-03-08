@@ -29,7 +29,6 @@ class Catalog {
     }
 
     async update(id: string, data: ICatalog) {
-        console.log(data)
         return await axios.put(`${process.env.NEXT_PUBLIC_SERVER}/catalog`, {
             id, data
         }).then((res) => res.data)

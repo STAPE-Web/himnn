@@ -39,6 +39,8 @@ const SliderBox = () => {
                             </ul>
                             <ButtonDefault onClick={() => router.push("/catalog")}>Перейти в каталог</ButtonDefault>
                         </div>
+
+                        <img className={styles.Image} src={`/SliderItem_${index}.png`} alt="" />
                     </section>
                 </div>
             ))}

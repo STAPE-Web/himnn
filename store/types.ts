@@ -1,4 +1,4 @@
-import { ICatalog, ICategory, IFilter, IItems } from "@/types";
+import { ICartItem, ICatalog, ICategory, IFilter, IItems } from "@/types";
 
 export default interface State {
     search: boolean;
@@ -10,6 +10,7 @@ export default interface State {
     catalogData: ICatalog | null,
     categoryData: ICategory | null,
     itemData: IItems | null,
+    cartData: ICartItem[],
 
     changeSearch: (value: boolean) => void
     changeCall: (value: boolean) => void
@@ -20,4 +21,5 @@ export default interface State {
     changeCatalogData: (value: ICatalog) => void
     changeCategoryData: (value: ICategory) => void
     changeItemData: (value: IItems) => void
+    changeCartData: (value: ICartItem[]) => void
 }

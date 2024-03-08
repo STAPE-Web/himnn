@@ -31,7 +31,7 @@ const Additional: FC<Props> = ({ data }) => {
             <h2>Характеристики</h2>
 
             <div className={styles.Box}>
-                {items.map((item, index) => (
+                {items.filter(i => i.value !== "" && i.value !== 0).map((item, index) => (
                     <div key={index} className={styles.Item}>
                         <p>{item.name}</p>
                         <div />

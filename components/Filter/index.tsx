@@ -12,18 +12,18 @@ import { FilterAPI } from "@/api"
 interface Props {
     filterData: string[]
     setFilterData: Dispatch<SetStateAction<string[]>>
+    setMin: Dispatch<SetStateAction<string>>
+    setMax: Dispatch<SetStateAction<string>>
+    max: string
+    min: string
+    setItems: Dispatch<SetStateAction<string[]>>
+    items: string[]
+
 }
 
-const Filter: FC<Props> = ({ filterData, setFilterData }) => {
+const Filter: FC<Props> = ({ filterData, setFilterData, max, min, setMax, setMin, setItems, items }) => {
     const itemsArray = ["В наличии (100)"]
-
-    const [items, setItems] = useState<string[]>([])
-
-    const [min, setMin] = useState("10")
-    const [max, setMax] = useState("1000")
-
     const [active, setActive] = useState(false)
-
     const [data, setData] = useState<IFilter[]>([])
 
     async function getAllCatalogs() {

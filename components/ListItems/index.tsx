@@ -5,25 +5,24 @@ import styles from "./style.module.css"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { CatalogAPI } from "@/api"
-import { ICatalog } from "@/types"
-import useEncoding from "@/hooks/useEnconding"
-
+import { CatalogAPI, CategoriesAPI } from "@/api"
+import { ICatalog, ICategory } from "@/types"
 
 const ListItems = () => {
     const router = useRouter()
     const [data, setData] = useState<ICatalog[]>([])
+    const [categories, setCategories] = useState<ICategory[]>([])
 
     async function getAllCatalogs() {
         const result = await CatalogAPI.getAll()
+        const catResult = await CategoriesAPI.getAll()
         setData(result)
+        setCategories(catResult)
     }
 
     useEffect(() => {
         getAllCatalogs()
     }, [])
-
-    const { transliterateText } = useEncoding()
 
     return (
         <div className={styles.Items}>
@@ -36,8 +35,8 @@ const ListItems = () => {
 
                         <div>
                             <h3>{item.data.title}</h3>
-                            <p>{item.data.text}</p>
-                            <ButtonDefault onClick={() => router.push(`/category?c=${transliterateText(item.data.title)}`)}>Смотреть</ButtonDefault>
+                            <p>{categories.map((cat) => cat.data.category === item.data.title ? ` ${cat.data.title} ·` : "").join('').slice(0, -1)}</p>
+                            <ButtonDefault onClick={() => router.push(`/category?c=${item.data.title.toLowerCase().replace(/ /g, '-')}`)}>Смотреть</ButtonDefault>
                         </div>
                     </div>
                 ))}

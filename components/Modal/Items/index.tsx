@@ -1,10 +1,16 @@
 import useGlobalStore from "@/store"
 import styles from "./style.module.css"
-import { ItemsAPI } from "@/api"
+import { CatalogAPI, CategoriesAPI, ItemsAPI } from "@/api"
 import Input from "@/ui/Input"
 import Textarea from "@/ui/Textarea"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Checkbox2 from "@/ui/Checkbox2"
+import { ICatalog, ICategory } from "@/types"
+import { useCallback, useEffect, useState } from "react"
+import Select from "@/ui/Select"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { storage } from "@/firebase"
+import { CheckIcon, ImageIcon } from "@/ui/Icons"
 
 const Items = () => {
     const itemData = useGlobalStore(state => state.itemData)
@@ -12,7 +18,22 @@ const Items = () => {
     const changeModal = useGlobalStore(state => state.changeModal)
     const modalMode = useGlobalStore(state => state.modalMode)
 
-    function handleInput(type: "title" | "text" | "artikul" | "price" | "subcategory" | "category", value: string) {
+    const [catalog, setCatalog] = useState<ICatalog[]>([])
+    const [subcategory, setSubcategory] = useState<ICategory[]>([])
+    const [image, setImage] = useState<any>([])
+
+    const getAllCatalogs = useCallback(async () => {
+        const catResult = await CatalogAPI.getAll()
+        const result = await CategoriesAPI.getAll()
+        setCatalog(catResult)
+        setSubcategory(result)
+    }, [])
+
+    useEffect(() => {
+        getAllCatalogs()
+    }, [])
+
+    function handleInput(type: "title" | "text" | "artikul" | "price" | "subcategory" | "category" | "seotitle" | "seodescription", value: string) {
         if (itemData !== null) {
             if (type === "title") changeitemData({ id: itemData?.id, data: { ...itemData?.data, title: value } })
             if (type === "artikul") changeitemData({ id: itemData?.id, data: { ...itemData?.data, artikul: value } })
@@ -20,6 +41,8 @@ const Items = () => {
             if (type === "price") changeitemData({ id: itemData?.id, data: { ...itemData?.data, price: Number(value) } })
             if (type === "subcategory") changeitemData({ id: itemData?.id, data: { ...itemData?.data, subcategory: value } })
             if (type === "category") changeitemData({ id: itemData?.id, data: { ...itemData?.data, category: value } })
+            if (type === "seodescription") changeitemData({ id: itemData?.id, data: { ...itemData?.data, seo: { ...itemData.data.seo, description: value } } })
+            if (type === "seotitle") changeitemData({ id: itemData?.id, data: { ...itemData?.data, seo: { ...itemData.data.seo, title: value } } })
         }
     }
 
@@ -55,6 +78,43 @@ const Items = () => {
         }
     }
 
+    function setCategory(value: string) {
+        if (itemData !== null) {
+            changeitemData({ id: itemData?.id, data: { ...itemData?.data, category: value } })
+        }
+    }
+
+    function setSubCategory(value: string) {
+        if (itemData !== null) {
+            changeitemData({ id: itemData?.id, data: { ...itemData?.data, subcategory: value } })
+        }
+    }
+
+    const loadImage = useCallback(async (path: string) => {
+        if (path !== "") {
+            const imageRef = ref(storage, path);
+
+            try {
+                const url = await getDownloadURL(imageRef);
+                if (itemData !== null) {
+                    changeitemData({ id: itemData?.id, data: { ...itemData?.data, image: url } })
+                }
+            } catch (error) {
+                console.error("Error getting download URL: ", error);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (image.length !== 0) {
+            const imageRef = ref(storage, `images/${Date.now()}/${image[0]?.name}`);
+
+            uploadBytes(imageRef, image[0]).then(() => {
+                loadImage(imageRef.fullPath);
+            })
+        }
+    }, [image, loadImage]);
+
     return (
         <div className={styles.Box} onClick={e => e.stopPropagation()}>
             {itemData !== null && <>
@@ -68,10 +128,28 @@ const Items = () => {
                         <p>В наличии</p>
                     </div>
                     <Input label="Название" onChange={e => handleInput("title", e.target.value)} type="text" value={itemData?.data.title || ""} />
-                    <Input label="Артикул" onChange={e => handleInput("artikul", e.target.value)} type="number" value={itemData?.data.artikul || ""} />
+
+                    <h3>Фото</h3>
+                    <input className={styles.UploadInput} id='upload' type="file" onChange={e => setImage(e.target.files)} />
+                    <label htmlFor="upload" className={styles.ButtonUpload}>
+                        {image.length !== 0
+                            ? <>
+                                <CheckIcon className={styles.Icon} /> Изображение загружено
+                            </>
+                            : <>
+                                <ImageIcon className={styles.Icon} /> Загрузить изображение
+                            </>
+                        }
+                    </label>
+
+                    <Input label="Артикул" onChange={e => handleInput("artikul", e.target.value)} type="text" value={itemData?.data.artikul || ""} />
                     <Input label="Цена" onChange={e => handleInput("price", e.target.value)} type="number" value={String(itemData?.data.price) || ""} />
-                    <Input label="Категория" onChange={e => handleInput("category", e.target.value)} type="text" value={itemData?.data.category || ""} />
-                    <Input label="Подкатегория" onChange={e => handleInput("subcategory", e.target.value)} type="text" value={itemData?.data.subcategory || ""} />
+                    <label>Категория</label>
+                    <Select array={catalog} value={itemData?.data.category || ""} setValue={setCategory} />
+                    {itemData.data.category.length !== 0 && <>
+                        <label>Подкатегория</label>
+                        <Select array={subcategory.filter(i => i.data.category === itemData?.data.category)} value={itemData?.data.subcategory || ""} setValue={setSubCategory} />
+                    </>}
                     <Textarea label="Описание" onChange={e => handleInput("text", e.target.value)} value={itemData?.data.text || ""} />
 
                     <h3>Дополнительно</h3>
@@ -82,6 +160,10 @@ const Items = () => {
                     <Input label="Длина, мм" onChange={e => handleAdditional("height", e.target.value)} type="number" value={String(itemData?.data.additional.height) || ""} />
                     <Input label="Толщина, мм" onChange={e => handleAdditional("thickness", e.target.value)} type="number" value={String(itemData?.data.additional.thickness) || ""} />
                     <Input label="Ширина, мм" onChange={e => handleAdditional("weight", e.target.value)} type="number" value={String(itemData?.data.additional.weight) || ""} />
+
+                    <h3>SEO</h3>
+                    <Input label="Заголовок" onChange={e => handleInput("seotitle", e.target.value)} type="text" value={itemData?.data.seo.title || ""} />
+                    <Textarea label="Описание" onChange={e => handleInput("seodescription", e.target.value)} value={itemData?.data.seo.description || ""} />
                 </div>
 
                 <div className={styles.Button}>

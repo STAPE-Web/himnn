@@ -2,11 +2,20 @@
 
 import Item from "@/ui/Item"
 import styles from "./style.module.css"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { ItemsAPI } from "@/api"
 import { IItems } from "@/types"
 
-const CatalogItems = () => {
+interface Props {
+    category: string
+    subcategory: string
+    filterData: string[]
+    items: string[]
+    min: string
+    max: string
+}
+
+const CatalogItems: FC<Props> = ({ category, subcategory, filterData, items, min, max }) => {
     const [data, setData] = useState<IItems[]>([])
 
     async function getAllCatalogs() {
@@ -20,9 +29,23 @@ const CatalogItems = () => {
 
     return (
         <div className={styles.List}>
-            {data.map((item, index) => (
-                <Item item={item} key={index} />
-            ))}
+            {data.filter(i => i.data.category.toLowerCase() === category.toLowerCase().replace(/-/g, ' '))
+                .filter(i => subcategory !== "" ? i.data.subcategory.toLowerCase() === subcategory.toLowerCase().replace(/-/g, ' ') : true)
+                .filter(i => filterData.length === 0 ? true :
+                    filterData.some(filterItem =>
+                        Object.values(i.data.additional).some(value =>
+                            typeof value === 'string' && value.includes(filterItem)
+                        )
+                    )
+                )
+                .filter(i => i.data.inStock === (items.length !== 0))
+                .filter(i => {
+                    const price = Number(i.data.price);
+                    return (!isNaN(Number(min)) && !isNaN(Number(max))) ? price >= Number(min) && price <= Number(max) : true;
+                })
+                .map((item, index) => (
+                    <Item item={item} key={index} />
+                ))}
         </div>
     )
 }

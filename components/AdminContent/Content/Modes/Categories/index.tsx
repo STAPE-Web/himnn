@@ -4,8 +4,8 @@ import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
-import { ICategory } from "@/types"
-import { CategoriesAPI } from "@/api"
+import { ICatalog, ICategory } from "@/types"
+import { CatalogAPI, CategoriesAPI } from "@/api"
 import useGlobalStore from "@/store"
 
 const Categories = () => {
@@ -38,13 +38,13 @@ const Categories = () => {
     function addItem() {
         changeModal(true)
         changeModalMode("AddCatagories")
-        changeCategoryData({ id: "", data: { image: "/Home_Item_4.png", text: "", title: "", category: "" } })
+        changeCategoryData({ id: "", data: { image: "/Home_Item_4.png", text: "", title: "", category: "", seo: { description: "", title: "" } } })
     }
 
     return (
         <div className={styles.Filter}>
             <div className={styles.TopRow}>
-                <h1>Категории</h1>
+                <h1>Подкатегории</h1>
                 <button onClick={() => addItem()}><AddIcon /></button>
             </div>
 

@@ -18,6 +18,7 @@ import Filter from "./Filter";
 import Add from "./Add";
 import Delete from "./Delete";
 import Edit from "./Edit";
+import Image from "./Image";
 
 export {
     Map as MapIcon,
@@ -39,5 +40,6 @@ export {
     Filter as FilterIcon,
     Add as AddIcon,
     Delete as DeleteIcon,
-    Edit as EditIcon
+    Edit as EditIcon,
+    Image as ImageIcon
 }

@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar"
 import styles from "./style.module.css"
 
 const AdminContent = () => {
-    const [state, setState] = useState<"Фильтр" | "Каталог" | "Категории" | "Товары">("Фильтр")
+    const [state, setState] = useState<"Фильтр" | "Категории" | "Подкатегории" | "Товары">("Фильтр")
 
     return (
         <main className={styles.AdminContent}>
