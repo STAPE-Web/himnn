@@ -1,0 +1,60 @@
+.Section {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: calc(100vh - 400px);
+}
+
+.Section h2 {
+    font-size: 32px;
+    line-height: 140%;
+    font-weight: 600;
+    color: #4E4E4E;
+}
+
+.Section h2::first-letter {
+    text-transform: uppercase;
+}
+
+.Row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.Items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.List {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.List>div {
+    width: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+    .Section {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .Row {
+        flex-direction: column;
+    }
+
+    .Section h2 {
+        font-size: 24px;
+    }
+}

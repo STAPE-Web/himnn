@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useGlobalStore from '@/store'
 import { ICartItem } from '@/types'
+import { useEffect, useState } from 'react'
 
 const Header = () => {
     const router = useRouter()
@@ -16,12 +17,15 @@ const Header = () => {
     const changeCall = useGlobalStore(state => state.changeCall)
     const changeMobileMenu = useGlobalStore(state => state.changeMobileMenu)
     const path = usePathname()
-    let cartItems: ICartItem[] = [];
-    let favoriteItems: ICartItem[] = [];
-    if (typeof window !== 'undefined') {
-        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
-        favoriteItems = JSON.parse(localStorage.getItem('favoriteItems') as string) || [];
-    }
+    const [cartItems, setCartItems] = useState<ICartItem[]>([])
+    const [favoriteItems, setFavoriteItems] = useState<ICartItem[]>([])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCartItems(JSON.parse(localStorage.getItem('cartItems') as string) || [])
+            setFavoriteItems(JSON.parse(localStorage.getItem('favoriteItems') as string) || [])
+        }
+    }, [])
 
     return (
         <header className={styles.Header}>

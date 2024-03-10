@@ -26,17 +26,8 @@ const SearchBox = () => {
     }, [getData])
 
     function handleData() {
-        data.forEach(item => {
-            if (item.data.artikul === value) {
-                router.push(`/item/${item.id}`)
-                changeSearch(false)
-            }
-
-            if (item.data.title.toLowerCase().includes(value.toLowerCase())) {
-                router.push(`/item/${item.id}`)
-                changeSearch(false)
-            }
-        })
+        router.push(`/search?q=${value}`)
+        changeSearch(false)
     }
 
     return (
