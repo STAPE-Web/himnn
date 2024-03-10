@@ -148,3 +148,21 @@
     width: 24px;
     height: 24px;
 }
+
+.Filter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #4e4e4e;
+}
+
+.FilterItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.FilterItem div {
+    width: 100%;
+}

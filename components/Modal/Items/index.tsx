@@ -186,9 +186,9 @@ const Items = () => {
                     <Input label="Ширина, мм" onChange={e => handleAdditional("weight", e.target.value)} type="number" value={String(itemData?.data.additional.weight) || ""} />
 
                     <h3>Привязка к фильтру</h3>
-                    <div>
+                    <div className={styles.Filter}>
                         {filter.map((item, index) => (
-                            <div key={index}>
+                            <div key={index} className={styles.FilterItem}>
                                 <h4>{item.data.title}</h4>
                                 <Select array={item.data.array} value={itemData?.data.filterData !== undefined
                                     ? itemData?.data.filterData[index].value

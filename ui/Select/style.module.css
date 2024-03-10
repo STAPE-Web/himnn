@@ -48,6 +48,8 @@
 
 .Checked {
     opacity: 0;
+    width: 15px !important;
+    height: 15px;
 }
 
 .CheckIcon {
