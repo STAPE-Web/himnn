@@ -32,6 +32,7 @@
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    min-height: 194px;
 }
 
 .Box h3 {
@@ -100,12 +101,14 @@
     position: absolute;
     width: 100%;
     z-index: 100;
+    height: auto;
 }
 
 .Item.Leave {
     position: absolute;
     width: 100%;
     z-index: 100;
+    height: auto;
 }
 
 .BookmarkIcon {

@@ -18,12 +18,20 @@ import InStock from "@/components/InStock"
 function ItemPage({ params }: any) {
     const [count, setCount] = useState("1")
     const [tab, setTab] = useState<"Описание" | "Наличие" | "Доставка" | "Оплата">("Описание")
+    const [data, setData] = useState<IItems | null>(null)
+
+    const category = data?.data.category.toLowerCase().replace(/ /g, '-') || ""
+    const subcategory = data?.data.subcategory.toLowerCase().replace(/ /g, '-') || ""
+    const categoryTitle = data?.data.category || ""
+    const subcategoryTitle = data?.data.subcategory || ""
+
+    console.log(category, categoryTitle)
 
     const bread = [
         { link: "/", name: "Главная" },
         { link: "/catalog", name: "Каталог" },
-        { link: "/catalog/asbestotekhnicheskiye-izdeliya", name: "Астбестотехнические изделия" },
-        { link: "/catalog/asbestotekhnicheskiye-izdeliya/asbokarton", name: "Асбокартон" },
+        { link: `/category?с=${category}` || "", name: categoryTitle },
+        { link: `/category?с=${category}&sub=${subcategory}` || "", name: subcategoryTitle },
         { link: "/item/paronit-sheet-pc-4x1030x1560mm-gost-481-80", name: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80" },
     ]
 
@@ -31,8 +39,6 @@ function ItemPage({ params }: any) {
         let section = document.getElementById("Additional");
         section?.scrollIntoView({ behavior: 'smooth' })
     }
-
-    const [data, setData] = useState<IItems | null>(null)
 
     const getData = useCallback(async () => {
         const result = await ItemsAPI.get(params.id)

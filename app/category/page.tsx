@@ -27,7 +27,7 @@ const Category = () => {
       setcategoryTitle(category ? category.replace(/-/g, ' ') : "")
       setsubcategoryTitle(subcategory ? subcategory.replace(/-/g, ' ') : "")
     }
-  }, [category, subcategory])
+  }, [category, subcategory, categoryTitle, subcategoryTitle])
 
   const bread = subcategory === "" ? [
     { link: "/", name: "Главная" },
@@ -37,7 +37,7 @@ const Category = () => {
     { link: "/", name: "Главная" },
     { link: "/catalog", name: "Каталог" },
     { link: `/category?c=${category}`, name: categoryTitle },
-    { link: `/category?c=${subcategory}`, name: subcategoryTitle },
+    { link: `/category?c=${category}&sub=${subcategory}`, name: subcategoryTitle },
   ]
 
   return (
