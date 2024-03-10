@@ -25,14 +25,12 @@ function ItemPage({ params }: any) {
     const categoryTitle = data?.data.category || ""
     const subcategoryTitle = data?.data.subcategory || ""
 
-    console.log(category, categoryTitle)
-
     const bread = [
         { link: "/", name: "Главная" },
         { link: "/catalog", name: "Каталог" },
-        { link: `/category?с=${category}` || "", name: categoryTitle },
-        { link: `/category?с=${category}&sub=${subcategory}` || "", name: subcategoryTitle },
-        { link: "/item/paronit-sheet-pc-4x1030x1560mm-gost-481-80", name: "Паронит листовой ПК, 4x1030x1560мм, ГОСТ 481-80" },
+        { link: `/category?c=${category}` || "", name: categoryTitle },
+        { link: `/category?c=${category}&sub=${subcategory}` || "", name: subcategoryTitle },
+        { link: "", name: data?.data.title || "" },
     ]
 
     function navigate() {
@@ -75,6 +73,31 @@ function ItemPage({ params }: any) {
         }
     }
 
+    function addToFavorite() {
+        const favoriteItems: ICartItem[] = JSON.parse(localStorage.getItem("favoriteItems") as string);
+        const objData = {
+            image: data?.data.image,
+            title: data?.data.title,
+            price: data?.data.price,
+            count,
+            id: data?.id
+        };
+
+        if (favoriteItems === null) {
+            localStorage.setItem("favoriteItems", JSON.stringify([objData]));
+            window.location.reload();
+        } else {
+            const existingItemIndex = favoriteItems.findIndex(i => i.id === objData.id);
+            if (existingItemIndex !== -1) {
+                favoriteItems[existingItemIndex].count = Number(favoriteItems[existingItemIndex].count) + Number(count);
+                localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+                window.location.reload();
+            } else {
+                localStorage.setItem("favoriteItems", JSON.stringify([...favoriteItems, objData]));
+                window.location.reload();
+            }
+        }
+    }
 
     function fillTabs() {
         if (data !== null) {
@@ -151,7 +174,7 @@ function ItemPage({ params }: any) {
                             <div className={styles.Controlls}>
                                 <Counter setValue={setCount} value={count} />
                                 <ButtonSmall onClick={() => addToCart()}>В корзину</ButtonSmall>
-                                <BookmarkIcon className={styles.Icon} />
+                                <BookmarkIcon className={styles.Icon} onClick={() => addToFavorite()} />
                             </div>
                         </div>
                     </div>

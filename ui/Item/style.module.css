@@ -24,6 +24,7 @@
 .Item img {
     width: 100%;
     background: #EAEAEA;
+    object-fit: cover;
 }
 
 .Box {
@@ -123,4 +124,19 @@
 
 .BookmarkIcon.ActiveIcon {
     opacity: 1;
+}
+
+@media screen and (max-width: 750px) {
+    .ItemBox {
+        width: 100%;
+    }
+
+    .BookmarkIcon {
+        opacity: 1;
+    }
+
+    .Controlls {
+        opacity: 1;
+        max-height: 100px;
+    }
 }

@@ -1,11 +1,11 @@
 import useGlobalStore from "@/store"
 import styles from "./style.module.css"
-import { CatalogAPI, CategoriesAPI, ItemsAPI } from "@/api"
+import { CatalogAPI, CategoriesAPI, FilterAPI, ItemsAPI } from "@/api"
 import Input from "@/ui/Input"
 import Textarea from "@/ui/Textarea"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Checkbox2 from "@/ui/Checkbox2"
-import { ICatalog, ICategory } from "@/types"
+import { ICatalog, ICategory, IFilter, IItemFilter } from "@/types"
 import { useCallback, useEffect, useState } from "react"
 import Select from "@/ui/Select"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
@@ -20,13 +20,16 @@ const Items = () => {
 
     const [catalog, setCatalog] = useState<ICatalog[]>([])
     const [subcategory, setSubcategory] = useState<ICategory[]>([])
+    const [filter, setFilter] = useState<IFilter[]>([])
     const [image, setImage] = useState<any>([])
 
     const getAllCatalogs = useCallback(async () => {
         const catResult = await CatalogAPI.getAll()
         const result = await CategoriesAPI.getAll()
+        const filterResult = await FilterAPI.getAll()
         setCatalog(catResult)
         setSubcategory(result)
+        setFilter(filterResult)
     }, [])
 
     useEffect(() => {
@@ -87,6 +90,27 @@ const Items = () => {
     function setSubCategory(value: string) {
         if (itemData !== null) {
             changeitemData({ id: itemData?.id, data: { ...itemData?.data, subcategory: value } })
+        }
+    }
+
+    function setFilterItem(value: string, index: number) {
+        if (itemData !== null) {
+            if (itemData?.data.filterData !== undefined) {
+                let filterData = itemData?.data.filterData
+                let indexFilter = filterData[index]
+                const newItem: IItemFilter = { ...indexFilter, value: value }
+                filterData[index] = newItem
+                changeitemData({ id: itemData?.id, data: { ...itemData?.data, filterData: filterData } })
+            } else {
+                const filterData: IItemFilter[] = filter.map((item) => ({
+                    name: item.data.title,
+                    value: ""
+                }))
+                const indexFilter = filterData[index]
+                const newItem: IItemFilter = { ...indexFilter, value: value }
+                filterData[index] = newItem
+                changeitemData({ id: itemData?.id, data: { ...itemData?.data, filterData: filterData } })
+            }
         }
     }
 
@@ -160,6 +184,19 @@ const Items = () => {
                     <Input label="Длина, мм" onChange={e => handleAdditional("height", e.target.value)} type="number" value={String(itemData?.data.additional.height) || ""} />
                     <Input label="Толщина, мм" onChange={e => handleAdditional("thickness", e.target.value)} type="number" value={String(itemData?.data.additional.thickness) || ""} />
                     <Input label="Ширина, мм" onChange={e => handleAdditional("weight", e.target.value)} type="number" value={String(itemData?.data.additional.weight) || ""} />
+
+                    <h3>Привязка к фильтру</h3>
+                    <div>
+                        {filter.map((item, index) => (
+                            <div key={index}>
+                                <h4>{item.data.title}</h4>
+                                <Select array={item.data.array} value={itemData?.data.filterData !== undefined
+                                    ? itemData?.data.filterData[index].value
+                                    : ""
+                                } setValue={setFilterItem} index={index} />
+                            </div>
+                        ))}
+                    </div>
 
                     <h3>SEO</h3>
                     <Input label="Заголовок" onChange={e => handleInput("seotitle", e.target.value)} type="text" value={itemData?.data.seo.title || ""} />

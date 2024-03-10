@@ -4,8 +4,8 @@ import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import { AddIcon, DeleteIcon, EditIcon } from "@/ui/Icons"
 import Image from "next/image"
-import { IItems } from "@/types"
-import { ItemsAPI } from "@/api"
+import { IFilter, IItemFilter, IItems } from "@/types"
+import { FilterAPI, ItemsAPI } from "@/api"
 import useGlobalStore from "@/store"
 
 const Items = () => {
@@ -14,10 +14,17 @@ const Items = () => {
     const changeModalMode = useGlobalStore(state => state.changeModalMode)
     const changeItemData = useGlobalStore(state => state.changeItemData)
     const [data, setData] = useState<IItems[]>([])
+    const [filter, setFilter] = useState<IItemFilter[]>([])
 
     const getAllCatalogs = useCallback(async () => {
         const result = await ItemsAPI.getAll()
+        const filterResult: IFilter[] = await FilterAPI.getAll()
+        const filterData: IItemFilter[] = filterResult.map((item) => ({
+            name: item.data.title,
+            value: ""
+        }))
         setData(result)
+        setFilter(filterData)
     }, [modal])
 
     useEffect(() => {
@@ -38,7 +45,7 @@ const Items = () => {
     function addItem() {
         changeModal(true)
         changeModalMode("AddItems")
-        changeItemData({ id: "", data: { image: "/Item.png", text: "", title: "", additional: { creator: "", height: 0, mark: "", standart: "", thickness: 0, weight: 0, width: 0 }, artikul: "", category: "", inStock: true, price: 0, seo: { description: "", title: "" }, subcategory: "" } })
+        changeItemData({ id: "", data: { image: "/Item.png", text: "", title: "", additional: { creator: "", height: 0, mark: "", standart: "", thickness: 0, weight: 0, width: 0 }, artikul: "", category: "", inStock: true, price: 0, seo: { description: "", title: "" }, subcategory: "", filterData: filter } })
     }
 
     return (

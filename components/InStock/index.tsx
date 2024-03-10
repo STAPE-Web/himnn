@@ -12,7 +12,7 @@ const InStock: FC<Props> = ({ data }) => {
         <div className={styles.Additional} id="Additional">
             <div className={styles.Box}>
                 <div className={styles.Item}>
-                    <p>Склад: г. Нижний Новгород, ул. Кузбасская, 17В</p>
+                    <p className={styles.Param}>Склад: г. Нижний Новгород, ул. Кузбасская, 17В</p>
                     <div />
                     <p>{data ? "В наличии" : "Нет в наличии"}</p>
                 </div>

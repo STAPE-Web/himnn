@@ -29,8 +29,6 @@ const Cart = () => {
     window.location.reload()
   }
 
-  const summ = cartItems.reduce((acc, item) => acc + (Number(item.count) * Number(item.price)), 0);
-
   return (
     <Layout>
       <section className={styles.Section}>
@@ -54,10 +52,7 @@ const Cart = () => {
         <div className={styles.Contolls}>
           <div>
             <button className={styles.ClearButton} onClick={() => router.push("/catalog")}>В каталог</button>
-            <h3>Итого: {summ.toFixed(2)} руб.</h3>
           </div>
-
-          <ButtonSmall onClick={() => router.push("/checkout")}>Оформить заказ</ButtonSmall>
         </div>
       </section>
     </Layout>

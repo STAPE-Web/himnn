@@ -12,6 +12,11 @@ export type ICatalog = {
     }
 }
 
+export type IItemFilter = {
+    name: string,
+    value: string
+}
+
 export type IItems = {
     id: string,
     data: {
@@ -37,6 +42,7 @@ export type IItems = {
         timestamp?: any
         category: string,
         subcategory: string
+        filterData: IItemFilter[]
     }
 }
 

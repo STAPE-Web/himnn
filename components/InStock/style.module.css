@@ -31,6 +31,10 @@
     min-width: fit-content;
 }
 
+.Param {
+    min-width: 0 !important;
+}
+
 .Item div {
     width: 100%;
     border-bottom: 1px dashed #BEBEBE;

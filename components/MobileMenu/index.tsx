@@ -44,10 +44,10 @@ const MobileMenu = () => {
                     <ArrowDownIcon />
                 </li>
 
-                <li className={styles.Additional} onClick={() => navigate("/category")}>Резинотехнические изделия</li>
-                <li className={styles.Additional} onClick={() => navigate("/category")}>Асбестотехнические изделия</li>
-                <li className={styles.Additional} onClick={() => navigate("/category")}>Электроизоляционные материалы</li>
-                <li className={styles.Additional} onClick={() => navigate("/category")}>Полимерные материалы</li>
+                <li className={styles.Additional} onClick={() => navigate("/category?c=резинотехнические-изделия")}>Резинотехнические изделия</li>
+                <li className={styles.Additional} onClick={() => navigate("/category?c=асбестотехнические-изделия")}>Асбестотехнические изделия</li>
+                <li className={styles.Additional} onClick={() => navigate("/category?c=электроизоляционные-материалы")}>Электроизоляционные материалы</li>
+                <li className={styles.Additional} onClick={() => navigate("/category?c=Полимерные-материалы")}>Полимерные материалы</li>
 
                 <li onClick={() => navigate("/delivery")}>Доставка</li>
                 <li onClick={() => navigate("/about")}>О компании</li>

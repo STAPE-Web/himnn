@@ -33,11 +33,13 @@ const CatalogItems: FC<Props> = ({ category, subcategory, filterData, items, min
                 .filter(i => subcategory !== "" ? i.data.subcategory.toLowerCase() === subcategory.toLowerCase().replace(/-/g, ' ') : true)
                 .filter(i => filterData.length === 0 ? true :
                     filterData.some(filterItem =>
-                        Object.values(i.data.additional).some(value =>
-                            typeof value === 'string' && value.includes(filterItem)
+                        i.data && i.data.filterData && Array.isArray(i.data.filterData) &&
+                        i.data.filterData.some(value =>
+                            typeof value.value === 'string' && value.value.includes(filterItem)
                         )
                     )
                 )
+
                 .filter(i => i.data.inStock === (items.length !== 0))
                 .filter(i => {
                     const price = Number(i.data.price);
