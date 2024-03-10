@@ -6,12 +6,10 @@ import { useEffect, useState } from "react"
 import { ICatalog, ICategory } from "@/types"
 import { CatalogAPI, CategoriesAPI } from "@/api"
 import { useRouter } from "next/navigation"
-import useEncoding from "@/hooks/useEnconding"
 
 const Categories = () => {
     const router = useRouter()
 
-    const { transliterateText } = useEncoding()
     const [data, setData] = useState<ICatalog[]>([])
     const [categories, setCategories] = useState<ICategory[]>([])
 

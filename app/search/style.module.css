@@ -43,6 +43,103 @@
     width: 100%;
 }
 
+.CatalogList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.CatalogList .Item {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.CatalogList .Item img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.CatalogList .Item div {
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.CatalogList .Item div h3 {
+    text-align: center;
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 600;
+    color: #4E4E4E;
+}
+
+.CatalogList .Item div p {
+    text-align: center;
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 300;
+    color: #4E4E4E;
+}
+
+.CategoryList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.CategoryList .Item {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.CategoryList .Item img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.CategoryList .Item div {
+    width: 50%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.CategoryList .Item div h3 {
+    text-align: center;
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 600;
+    color: #4E4E4E;
+}
+
+.CategoryList .Item div p {
+    text-align: center;
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 300;
+    color: #4E4E4E;
+    width: 100%;
+    word-break: break-all;
+}
+
 @media screen and (max-width: 1300px) {
     .Section {
         padding: 0 15px;
