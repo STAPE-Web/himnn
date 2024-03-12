@@ -3,6 +3,7 @@
 import Bread from "@/components/Bread"
 import Layout from "@/components/Layout"
 import styles from "./style.module.css"
+import Script from "next/script";
 
 const Delivery = () => {
   const bread = [
@@ -18,13 +19,14 @@ const Delivery = () => {
         <p className={styles.Text}>Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом. Доставим в любой регион РФ: транспортной компанией (доставка до терминала бесплатно), а также собственным транспортом.</p>
 
         <h3>География поставок:</h3>
-        <div className={styles.Map} style={{ position: "relative", overflow: "hidden" }}>
-          <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: 12, position: "absolute", top: 0 }}>Яндекс Карты</a>
-          <a href="https://yandex.ru/maps/?ll=88.048767%2C59.277244&utm_medium=mapframe&utm_source=maps&z=3.13" style={{ color: "#eee", fontSize: 12, position: "absolute", top: 14 }}>Яндекс Карты</a>
-          <iframe src="https://yandex.ru/map-widget/v1/?ll=88.048767%2C59.277244&z=3.13" width="560" height="400" style={{ position: "relative" }}>
-          </iframe>
-
-          {/* Нижний Новгород, Владимир, Москва, Саранск, Ульяновск, Белгород, Екатеринбург, Челябинск, Архангельск, Смоленск, Тольятти, Ижевск, Пермь, Ростов на Дону, */}
+        <div className={styles.Map}>
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?lang=ru_RU&amp;scroll=true&amp;source=constructor-api&amp;um=constructor%3A550590f7bc0becad129ad3b6dc508f09319001d1eeb9460f6c9d7ac740e43776"
+            allowFullScreen={true}
+            width="788px"
+            height="400px"
+            style={{ display: "block" }}
+          ></iframe>
         </div>
       </section>
     </Layout>
