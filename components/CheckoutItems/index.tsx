@@ -3,12 +3,16 @@
 import { ICartItem } from "@/types";
 import styles from "./style.module.css"
 import CheckoutItem from "@/ui/CheckoutItem"
+import { useEffect, useState } from "react";
 
 const CheckoutItems = () => {
-    let cartItems: ICartItem[] = [];
-    if (typeof window !== 'undefined') {
-        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
-    }
+    const [cartItems, setCartItems] = useState<ICartItem[]>([])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCartItems(JSON.parse(localStorage.getItem('cartItems') as string) || [])
+        }
+    }, [])
 
     return (
         <div className={styles.CheckoutItems}>

@@ -59,7 +59,8 @@
     line-height: 24px;
 }
 
-.InfoBox p a {
+.InfoBox p a,
+.InfoBox a {
     color: #00B302;
 }
 

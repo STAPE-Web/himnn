@@ -39,13 +39,23 @@ const Items = () => {
     function editItem(item: IItems) {
         changeModal(true)
         changeModalMode("Items")
-        changeItemData(item)
+        if (item.data.filterData.length !== filter.length) {
+            const newItems = filter.filter(filterItem => !item.data.filterData.some(existingItem => existingItem.name === filterItem.name));
+
+            if (newItems.length > 0) {
+                changeItemData({ id: item.id, data: { ...item.data, filterData: [...item.data.filterData, ...newItems] } });
+            } else {
+                changeItemData(item);
+            }
+        } else {
+            changeItemData(item);
+        }
     }
 
     function addItem() {
         changeModal(true)
         changeModalMode("AddItems")
-        changeItemData({ id: "", data: { image: "/Item.png", text: "", title: "", additional: { creator: "", height: 0, mark: "", standart: "", thickness: 0, weight: 0, width: 0 }, artikul: "", category: "", inStock: true, price: 0, seo: { description: "", title: "" }, subcategory: "", filterData: filter } })
+        changeItemData({ id: "", data: { image: "/Item.png", text: "", title: "", additional: { creator: "", height: 0, mark: "", standart: "", thickness: 0, weight: 0, width: 0 }, gost: { file: "", title: "" }, additionalArray: [], artikul: "", category: "", inStock: true, price: 0, seo: { description: "", title: "" }, subcategory: "", filterData: filter } })
     }
 
     return (

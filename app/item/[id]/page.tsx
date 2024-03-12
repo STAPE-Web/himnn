@@ -14,6 +14,7 @@ import Additional from "@/components/Additional"
 import { ICartItem, IItems } from "@/types"
 import { ItemsAPI } from "@/api"
 import InStock from "@/components/InStock"
+import Link from "next/link"
 
 function ItemPage({ params }: any) {
     const [count, setCount] = useState("1")
@@ -104,7 +105,8 @@ function ItemPage({ params }: any) {
             switch (tab) {
                 case "Описание": return <>
                     <p>{data.data.text}</p>
-                    <Additional data={data.data.additional} />
+                    <Link href={data.data.gost.file} target="_blank" className={styles.Gost}><h3>{data.data.gost.title}</h3></Link>
+                    <Additional data={data.data.additionalArray} />
                 </>
                 case "Наличие": return <InStock data={data.data.inStock} />
                 case "Доставка": return <div className={styles.Delivery}>

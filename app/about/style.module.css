@@ -37,6 +37,11 @@
     border: none !important;
 }
 
+.Image {
+    float: right;
+    margin-left: 20px;
+}
+
 @media screen and (max-width: 1300px) {
     .Section {
         padding: 0 15px;

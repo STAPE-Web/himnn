@@ -19,6 +19,7 @@ import Add from "./Add";
 import Delete from "./Delete";
 import Edit from "./Edit";
 import Image from "./Image";
+import Check2 from "./Check2";
 
 export {
     Map as MapIcon,
@@ -41,5 +42,6 @@ export {
     Add as AddIcon,
     Delete as DeleteIcon,
     Edit as EditIcon,
-    Image as ImageIcon
+    Image as ImageIcon,
+    Check2 as Check2Icon,
 }

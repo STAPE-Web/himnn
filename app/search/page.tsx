@@ -49,8 +49,10 @@ const SearchPage = () => {
                 <section className={styles.Section}>
                     <Bread array={bread} />
 
-                    <h2>{data.filter(i => i.data.artikul === query ? true : i.data.title.toLowerCase().includes(query.toLowerCase())).length !== 0
-                        || catalog.filter(i => i.data.title === query ? true : i.data.title.toLowerCase().includes(query.toLowerCase())).length !== 0 ? query : `По Вашему запросу "${query}" ничего не найдено`}</h2>
+                    {data.length === 0 && <Image src={"/Loader.gif"} width={60} height={60} className={styles.Loader} alt='' />}
+
+                    {data.length !== 0 && <h2>{data.filter(i => i.data.artikul === query ? true : i.data.title.toLowerCase().includes(query.toLowerCase())).length !== 0
+                        || catalog.filter(i => i.data.title === query ? true : i.data.title.toLowerCase().includes(query.toLowerCase())).length !== 0 ? query : `По Вашему запросу "${query}" ничего не найдено`}</h2>}
 
                     <div className={styles.CatalogList}>
                         {catalog
@@ -68,16 +70,18 @@ const SearchPage = () => {
                     </div>
 
                     <div className={styles.CategoryList}>
-                        {categories.map((item, index) => (
-                            <div key={index} className={styles.Item} onClick={() => router.push(`/category?sub=${item.data.title.toLowerCase().replace(/ /g, '-')}`)}>
-                                <Image src={item.data.image} width={220} height={220} alt="" />
+                        {categories
+                            .filter(i => i.data.title === query ? true : i.data.title.toLowerCase().includes(query.toLowerCase()))
+                            .map((item, index) => (
+                                <div key={index} className={styles.Item} onClick={() => router.push(`/category?sub=${item.data.title.toLowerCase().replace(/ /g, '-')}`)}>
+                                    <Image src={item.data.image} width={220} height={220} alt="" />
 
-                                <div>
-                                    <h3>{item.data.title}</h3>
-                                    <p>{item.data.text}</p>
+                                    <div>
+                                        <h3>{item.data.title}</h3>
+                                        <p>{item.data.text}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
 
                     <div className={styles.Items}>

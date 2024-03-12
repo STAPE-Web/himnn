@@ -1,7 +1,7 @@
 "use client"
 
 import ButtonSmall from "@/ui/Buttons/Small"
-import { UserIcon } from "@/ui/Icons"
+import { Check2Icon, UserIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
 import Checkbox2 from "@/ui/Checkbox2"
@@ -12,9 +12,10 @@ import { ICartItem, ICheckout } from "@/types"
 interface Props {
     setActiveorder: Dispatch<SetStateAction<boolean>>
     setData: Dispatch<SetStateAction<ICheckout>>
+    activeOrder: boolean
 }
 
-const CustomerInfo: FC<Props> = ({ setActiveorder, setData }) => {
+const CustomerInfo: FC<Props> = ({ setActiveorder, setData, activeOrder }) => {
     const [active, setActive] = useState(false)
     const [fullname, setFullname] = useState("")
     const [email, setEmail] = useState("")
@@ -32,10 +33,14 @@ const CustomerInfo: FC<Props> = ({ setActiveorder, setData }) => {
     const [city, setCity] = useState("")
     const [corespondentAccount, setCorespondentAccount] = useState("")
     const [contactPerson, setContactPerson] = useState("")
-    let cartItems: ICartItem[] = [];
-    if (typeof window !== 'undefined') {
-        cartItems = JSON.parse(localStorage.getItem('cartItems') as string) || [];
-    }
+
+    const [cartItems, setCartItems] = useState<ICartItem[]>([])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCartItems(JSON.parse(localStorage.getItem('cartItems') as string) || [])
+        }
+    }, [])
 
     useEffect(() => {
         setData({
@@ -47,7 +52,10 @@ const CustomerInfo: FC<Props> = ({ setActiveorder, setData }) => {
         <div className={`${styles.CustomerInfo} ${active ? styles.Active : ""}`}>
             <div className={styles.Top}>
                 <div>
-                    <UserIcon />
+                    {activeOrder
+                        ? <Check2Icon />
+                        : <UserIcon />
+                    }
                     <h3>Информация о покупателе</h3>
                 </div>
 

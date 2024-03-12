@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react"
 import Select from "@/ui/Select"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { storage } from "@/firebase"
-import { CheckIcon, ImageIcon } from "@/ui/Icons"
+import { AddIcon, CheckIcon, DeleteIcon, ImageIcon } from "@/ui/Icons"
 
 const Items = () => {
     const itemData = useGlobalStore(state => state.itemData)
@@ -22,6 +22,11 @@ const Items = () => {
     const [subcategory, setSubcategory] = useState<ICategory[]>([])
     const [filter, setFilter] = useState<IFilter[]>([])
     const [image, setImage] = useState<any>([])
+    const [file, setFile] = useState<any>([])
+
+    const [activeAdd, setActiveAdd] = useState(false)
+    const [addName, setAddName] = useState("")
+    const [addValue, setAddValue] = useState("")
 
     const getAllCatalogs = useCallback(async () => {
         const catResult = await CatalogAPI.getAll()
@@ -36,7 +41,7 @@ const Items = () => {
         getAllCatalogs()
     }, [])
 
-    function handleInput(type: "title" | "text" | "artikul" | "price" | "subcategory" | "category" | "seotitle" | "seodescription", value: string) {
+    function handleInput(type: "title" | "text" | "artikul" | "price" | "subcategory" | "category" | "seotitle" | "seodescription" | "gost", value: string) {
         if (itemData !== null) {
             if (type === "title") changeitemData({ id: itemData?.id, data: { ...itemData?.data, title: value } })
             if (type === "artikul") changeitemData({ id: itemData?.id, data: { ...itemData?.data, artikul: value } })
@@ -46,24 +51,13 @@ const Items = () => {
             if (type === "category") changeitemData({ id: itemData?.id, data: { ...itemData?.data, category: value } })
             if (type === "seodescription") changeitemData({ id: itemData?.id, data: { ...itemData?.data, seo: { ...itemData.data.seo, description: value } } })
             if (type === "seotitle") changeitemData({ id: itemData?.id, data: { ...itemData?.data, seo: { ...itemData.data.seo, title: value } } })
+            if (type === "gost") changeitemData({ id: itemData?.id, data: { ...itemData?.data, gost: { ...itemData.data.gost, title: value } } })
         }
     }
 
     function handleCheckbox(type: "inStock", value: boolean) {
         if (itemData !== null) {
             if (type === "inStock") changeitemData({ id: itemData?.id, data: { ...itemData?.data, inStock: value } })
-        }
-    }
-
-    function handleAdditional(type: "creator" | "height" | "mark" | "standart" | "thickness" | "weight" | "width", value: string) {
-        if (itemData !== null) {
-            if (type === "creator") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, creator: value } } })
-            if (type === "height") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, height: Number(value) } } })
-            if (type === "mark") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, mark: value } } })
-            if (type === "standart") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, standart: value } } })
-            if (type === "thickness") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, thickness: Number(value) } } })
-            if (type === "weight") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, weight: Number(value) } } })
-            if (type === "width") changeitemData({ id: itemData?.id, data: { ...itemData?.data, additional: { ...itemData?.data.additional, width: Number(value) } } })
         }
     }
 
@@ -129,6 +123,21 @@ const Items = () => {
         }
     }, []);
 
+    const loadFile = useCallback(async (path: string) => {
+        if (path !== "") {
+            const fileRef = ref(storage, path);
+
+            try {
+                const url = await getDownloadURL(fileRef);
+                if (itemData !== null) {
+                    changeitemData({ id: itemData?.id, data: { ...itemData?.data, gost: { ...itemData.data.gost, file: url } } })
+                }
+            } catch (error) {
+                console.error("Error getting download URL: ", error);
+            }
+        }
+    }, []);
+
     useEffect(() => {
         if (image.length !== 0) {
             const imageRef = ref(storage, `images/${Date.now()}/${image[0]?.name}`);
@@ -138,6 +147,47 @@ const Items = () => {
             })
         }
     }, [image, loadImage]);
+
+    useEffect(() => {
+        if (file.length !== 0) {
+            const fileRef = ref(storage, `file/${Date.now()}/${file[0]?.name}`);
+
+            uploadBytes(fileRef, file[0]).then(() => {
+                loadFile(fileRef.fullPath);
+            })
+        }
+    }, [file, loadFile]);
+
+    function handleAdditional(value: string, index: number, type: "name" | "value") {
+        if (type === "name" && itemData) {
+            const updatedItemData = { ...itemData };
+            updatedItemData.data.additionalArray[index].name = value;
+            changeitemData({ id: updatedItemData.id, data: updatedItemData.data });
+        }
+
+        if (type === "value" && itemData) {
+            const updatedItemData = { ...itemData };
+            updatedItemData.data.additionalArray[index].value = value;
+            changeitemData({ id: updatedItemData.id, data: updatedItemData.data });
+        }
+    }
+
+    function addAdditional() {
+        if (itemData !== null) {
+            const newItem = { name: addName, value: addValue }
+            changeitemData({ id: itemData?.id, data: { ...itemData?.data, additionalArray: [...itemData?.data.additionalArray, newItem], } })
+            setAddName("")
+            setAddValue("")
+            setActiveAdd(false)
+        }
+    }
+
+    function deleteAdditional(index: number) {
+        if (itemData !== null) {
+            const newItem = itemData.data.additionalArray.filter((_, id) => id !== index);
+            changeitemData({ id: itemData?.id, data: { ...itemData?.data, additionalArray: newItem, } })
+        }
+    }
 
     return (
         <div className={styles.Box} onClick={e => e.stopPropagation()}>
@@ -176,14 +226,22 @@ const Items = () => {
                     </>}
                     <Textarea label="Описание" onChange={e => handleInput("text", e.target.value)} value={itemData?.data.text || ""} />
 
-                    <h3>Дополнительно</h3>
-                    <Input label="Страна производитель" onChange={e => handleAdditional("creator", e.target.value)} type="text" value={itemData?.data.additional.creator || ""} />
-                    <Input label="Марка товара" onChange={e => handleAdditional("mark", e.target.value)} type="text" value={itemData?.data.additional.mark || ""} />
-                    <Input label="Стандарт" onChange={e => handleAdditional("standart", e.target.value)} type="text" value={itemData?.data.additional.standart || ""} />
-                    <Input label="Вес, кг" onChange={e => handleAdditional("weight", e.target.value)} type="number" value={String(itemData?.data.additional.weight) || ""} />
-                    <Input label="Длина, мм" onChange={e => handleAdditional("height", e.target.value)} type="number" value={String(itemData?.data.additional.height) || ""} />
-                    <Input label="Толщина, мм" onChange={e => handleAdditional("thickness", e.target.value)} type="number" value={String(itemData?.data.additional.thickness) || ""} />
-                    <Input label="Ширина, мм" onChange={e => handleAdditional("weight", e.target.value)} type="number" value={String(itemData?.data.additional.weight) || ""} />
+                    <div className={styles.Row2}>
+                        <h3>Дополнительно</h3>
+                        <AddIcon onClick={() => setActiveAdd(!activeAdd)} />
+                    </div>
+
+                    {activeAdd && <div className={styles.Row}>
+                        <Input label="Пункт" onChange={e => setAddName(e.target.value)} type="text" value={addName} />
+                        <Input label="Значение" onChange={e => setAddValue(e.target.value)} type="text" value={addValue} />
+                        <button className={styles.AddButton} onClick={() => addAdditional()}><CheckIcon /></button>
+                    </div>}
+
+                    {itemData?.data.additionalArray.map((item, index) => (<div className={styles.Row} key={index}>
+                        <Input label="" onChange={e => handleAdditional(e.target.value, index, "name")} type="text" value={item.name} />
+                        <Input label="" onChange={e => handleAdditional(e.target.value, index, "value")} type="text" value={item.value} />
+                        <button className={styles.DeleteButton} onClick={() => deleteAdditional(index)}><DeleteIcon /></button>
+                    </div>))}
 
                     <h3>Привязка к фильтру</h3>
                     <div className={styles.Filter}>
@@ -197,6 +255,20 @@ const Items = () => {
                             </div>
                         ))}
                     </div>
+
+                    <h3>ГОСТ</h3>
+                    <Input label="Заголовок" onChange={e => handleInput("gost", e.target.value)} type="text" value={itemData?.data.gost.title || ""} />
+                    <input className={styles.UploadInput} id='upload1' type="file" onChange={e => setFile(e.target.files)} />
+                    <label htmlFor="upload1" className={styles.ButtonUpload}>
+                        {file.length !== 0
+                            ? <>
+                                <CheckIcon className={styles.Icon} /> Файл загружен
+                            </>
+                            : <>
+                                <ImageIcon className={styles.Icon} /> Загрузить файл
+                            </>
+                        }
+                    </label>
 
                     <h3>SEO</h3>
                     <Input label="Заголовок" onChange={e => handleInput("seotitle", e.target.value)} type="text" value={itemData?.data.seo.title || ""} />

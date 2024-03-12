@@ -140,6 +140,10 @@
     word-break: break-all;
 }
 
+.Loader {
+    align-self: center;
+}
+
 @media screen and (max-width: 1300px) {
     .Section {
         padding: 0 15px;

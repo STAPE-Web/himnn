@@ -52,7 +52,7 @@ const Checkout = () => {
         <div className={styles.Box}>
           <div className={styles.MiniBox}>
             <CheckoutItems />
-            <CustomerInfo setActiveorder={setActiveorder} setData={setData} />
+            <CustomerInfo activeOrder={activeOrder} setActiveorder={setActiveorder} setData={setData} />
 
             <div className={styles.ActiveOrder}>
               {activeOrder &&

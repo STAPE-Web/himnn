@@ -17,6 +17,11 @@ export type IItemFilter = {
     value: string
 }
 
+export type IAddArray = {
+    name: string,
+    value: string
+}
+
 export type IItems = {
     id: string,
     data: {
@@ -32,12 +37,17 @@ export type IItems = {
             mark: string,
             height: number
         },
+        additionalArray: IAddArray[]
         inStock: boolean,
         text: string,
         title: string,
         seo: {
             description: string,
             title: string
+        },
+        gost: {
+            title: string,
+            file: string,
         },
         timestamp?: any
         category: string,

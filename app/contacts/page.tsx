@@ -39,6 +39,11 @@ const Contacts = () => {
                             <h3>Режим работы</h3>
                             <p>Пн-Пт: 9-17 <br />Сб-Вс: выходной</p>
                         </div>
+
+                        <div>
+                            <h3>Схема проезда</h3>
+                            <Link href="/Scheme.png">Скачать схему проезда</Link>
+                        </div>
                     </div>
 
                     <div className={styles.Map} style={{ position: "relative", overflow: "hidden" }}>

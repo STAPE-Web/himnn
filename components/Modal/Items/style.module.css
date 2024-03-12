@@ -45,6 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .Box svg {
@@ -165,4 +166,47 @@
 
 .FilterItem div {
     width: 100%;
+}
+
+.Row2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Row2 svg {
+    margin-top: 15px;
+}
+
+.AddButton {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: #00B302;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.AddButton svg,
+.DeleteButton svg {
+    width: 18px;
+    height: 18px;
+    color: #fff;
+}
+
+.DeleteButton {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: #f47526;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
 }
