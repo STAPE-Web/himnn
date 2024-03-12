@@ -11,10 +11,9 @@ import Counter from "@/components/Counter"
 
 interface Props {
     item: IItems
-    index: number
 }
 
-const Item: FC<Props> = ({ item, index }) => {
+const Item: FC<Props> = ({ item }) => {
     const [active, setActive] = useState(false)
     const router = useRouter()
     const [count, setCount] = useState("1")
