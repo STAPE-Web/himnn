@@ -46,7 +46,7 @@ const CatalogItems: FC<Props> = ({ category, subcategory, filterData, items, min
                     return (!isNaN(Number(min)) && !isNaN(Number(max))) ? price >= Number(min) && price <= Number(max) : true;
                 })
                 .map((item, index) => (
-                    <Item item={item} index={index} key={index} />
+                    <Item item={item} key={index} />
                 ))}
         </div>
     )
