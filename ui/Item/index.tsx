@@ -11,9 +11,10 @@ import Counter from "@/components/Counter"
 
 interface Props {
     item: IItems
+    index: number
 }
 
-const Item: FC<Props> = ({ item }) => {
+const Item: FC<Props> = ({ item, index }) => {
     const [active, setActive] = useState(false)
     const router = useRouter()
     const [count, setCount] = useState("1")
@@ -74,8 +75,12 @@ const Item: FC<Props> = ({ item }) => {
         <div className={styles.ItemBox}>
             <div
                 onClick={() => router.push(`/item/${item.id}`)}
-                onMouseEnter={() => setActive(true)}
-                onMouseLeave={() => setActive(false)}
+                onMouseEnter={() => {
+                    setActive(true)
+                }}
+                onMouseLeave={() => {
+                    setActive(false)
+                }}
                 className={`${styles.Item} ${active ? styles.Active : ""}`}
             >
                 <BookmarkIcon className={`${styles.BookmarkIcon} ${active ? styles.ActiveIcon : ""}`} onClick={(e: any) => {

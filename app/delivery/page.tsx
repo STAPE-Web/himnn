@@ -3,7 +3,6 @@
 import Bread from "@/components/Bread"
 import Layout from "@/components/Layout"
 import styles from "./style.module.css"
-import Script from "next/script";
 
 const Delivery = () => {
   const bread = [

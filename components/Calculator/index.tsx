@@ -9,9 +9,10 @@ interface Props {
     max: string;
     setMin: React.Dispatch<React.SetStateAction<string>>
     setMax: React.Dispatch<React.SetStateAction<string>>
+    maxPrice: string
 }
 
-const Calculator: FC<Props> = ({ max, min, setMax, setMin }) => {
+const Calculator: FC<Props> = ({ max, min, setMax, setMin, maxPrice }) => {
     const handleInput = (e: ChangeResult) => {
         setMin(String(e.minValue));
         setMax(String(e.maxValue));
@@ -27,7 +28,7 @@ const Calculator: FC<Props> = ({ max, min, setMax, setMin }) => {
 
             <MultiRangeSlider
                 min={10}
-                max={1000}
+                max={maxPrice}
                 step={10}
                 minValue={min}
                 maxValue={max}

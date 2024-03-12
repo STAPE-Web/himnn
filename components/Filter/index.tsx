@@ -6,8 +6,8 @@ import Calculator from "../Calculator"
 import styles from "./style.module.css"
 import ButtonSmall from "@/ui/Buttons/Small"
 import { CloseIcon, FilterIcon } from "@/ui/Icons"
-import { IFilter } from "@/types"
-import { FilterAPI } from "@/api"
+import { IFilter, IItems } from "@/types"
+import { FilterAPI, ItemsAPI } from "@/api"
 
 interface Props {
     filterData: string[]
@@ -25,9 +25,17 @@ const Filter: FC<Props> = ({ filterData, setFilterData, max, min, setMax, setMin
     const itemsArray = ["В наличии (100)"]
     const [active, setActive] = useState(false)
     const [data, setData] = useState<IFilter[]>([])
+    const [maxPrice, setMaxPrice] = useState("1000000")
 
     async function getAllCatalogs() {
         const result = await FilterAPI.getAll()
+        const itemsData: IItems[] = await ItemsAPI.getAll()
+        const maxPrice = itemsData.reduce((max, item) => {
+            return item.data.price > max ? item.data.price : max;
+        }, -Infinity);
+
+        setMaxPrice(String(maxPrice))
+        setMax(String(maxPrice) || "1000")
         setData(result)
     }
 
@@ -45,7 +53,7 @@ const Filter: FC<Props> = ({ filterData, setFilterData, max, min, setMax, setMin
             <div className={`${styles.Filter} ${active ? styles.Active : ""}`}>
                 <div className={styles.Row}>
                     <h4>Цена</h4>
-                    <Calculator max={max} min={min} setMax={setMax} setMin={setMin} />
+                    <Calculator max={max} min={min} maxPrice={maxPrice} setMax={setMax} setMin={setMin} />
                 </div>
 
                 <div className={styles.Row}>
