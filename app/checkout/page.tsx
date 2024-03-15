@@ -41,7 +41,8 @@ const Checkout = () => {
 
   async function createOrder() {
     alert("Заявка отправлена")
-    emailjs.send("service_e63g8l5", "template_uvmya8q", { username: data.fullname, item: data.items[0].title }, "F6DCYeZIduPzD_JD8")
+    emailjs.init(process.env.USER_ID || "")
+    await emailjs.send(process.env.SERVICE_ID || "", process.env.TEMPLATE_ID || "", { username: data.fullname, item: data.items[0].title, email: data.email })
     await CheckoutAPI.create(data)
   }
 
