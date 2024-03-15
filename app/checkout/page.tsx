@@ -39,10 +39,12 @@ const Checkout = () => {
     state: true
   })
 
+  console.log(data.email)
+
   async function createOrder() {
     alert("Заявка отправлена")
-    emailjs.init(process.env.USER_ID || "")
-    await emailjs.send(process.env.SERVICE_ID || "", process.env.TEMPLATE_ID || "", { username: data.fullname, item: data.items[0].title, email: data.email })
+    emailjs.init("F6DCYeZIduPzD_JD8")
+    await emailjs.send("service_fbtmy0t", "template_uvmya8q", { username: data.fullname, item: data.items[0].title, email: data.email })
     await CheckoutAPI.create(data)
     window.location.replace("/")
   }
