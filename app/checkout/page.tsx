@@ -44,6 +44,7 @@ const Checkout = () => {
     emailjs.init(process.env.USER_ID || "")
     await emailjs.send(process.env.SERVICE_ID || "", process.env.TEMPLATE_ID || "", { username: data.fullname, item: data.items[0].title, email: data.email })
     await CheckoutAPI.create(data)
+    window.location.replace("/")
   }
 
   return (
