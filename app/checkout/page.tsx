@@ -39,8 +39,6 @@ const Checkout = () => {
     state: true
   })
 
-  console.log(data.email)
-
   async function createOrder() {
     alert("Заявка отправлена")
     emailjs.init("F6DCYeZIduPzD_JD8")
