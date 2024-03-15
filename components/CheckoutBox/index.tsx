@@ -27,16 +27,16 @@ const CheckoutBox = () => {
                         <p>{summ.toFixed(2)} руб.</p>
                     </div>
 
-                    <div className={styles.Fill}>
+                    {/* <div className={styles.Fill}>
                         <p>Доставка:</p>
                         <p>100 руб.</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             <div className={styles.Row}>
                 <h4>Итого:</h4>
-                <h4>{(summ + 100).toFixed(2)} руб.</h4>
+                <h4>{(summ).toFixed(2)} руб.</h4>
             </div>
         </div>
     )
