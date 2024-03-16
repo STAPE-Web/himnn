@@ -42,10 +42,9 @@ const Checkout = () => {
   })
 
   async function createOrder() {
-    const items = data.items.map(i => (`${i.title},`))
     alert("Заявка отправлена")
     emailjs.init("F6DCYeZIduPzD_JD8")
-    await emailjs.send("service_fbtmy0t", "template_uvmya8q", { username: data.fullname, item: items.map(i => (i)), email: data.email })
+    await emailjs.send("service_fbtmy0t", "template_uvmya8q", { username: data.fullname, item: data.items.map(i => (i)), email: data.email })
     await CheckoutAPI.create(data)
     router.push("/")
   }
