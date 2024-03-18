@@ -49,7 +49,7 @@ const Contacts = () => {
                     <div className={styles.Map} style={{ position: "relative", overflow: "hidden" }}>
                         <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: 12, position: "absolute", top: 0 }}>Яндекс Карты</a>
                         <a href="https://yandex.ru/maps/?ll=88.048767%2C59.277244&utm_medium=mapframe&utm_source=maps&z=3.13" style={{ color: "#eee", fontSize: 12, position: "absolute", top: 14 }}>Яндекс Карты</a>
-                        <iframe src="https://yandex.ru/map-widget/v1/?ll=88.048767%2C59.277244&z=3.13" width="560" height="400" style={{ position: "relative" }}>
+                        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa382b821ba9a709c074eefc244e22b815d20db336092cc5e49498dfadb07f2cf&amp;source=constructor" width="560" height="400" style={{ position: "relative" }}>
                         </iframe>
                     </div>
                 </div>
