@@ -27,10 +27,10 @@ const SliderBox = () => {
 
     return (
         <Slider {...settings}>
-            {[0, 1, 2, 3, 4].map((index) => (
+            {[1, 2, 3, 4].map((index) => (
                 <div key={index}>
                     <section
-                        className={styles.Slider}
+                        className={`${styles.Slider} ${index !== 3 ? styles.Active : ""}`}
                         style={{ background: `url("/Home_Slider_${index}.png") no-repeat` }}
                     >
                         <div className={styles.Box}>
