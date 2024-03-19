@@ -10,19 +10,21 @@ import Partner7 from "@/assets/Partner7"
 import Partner8 from "@/assets/Partner8"
 import styles from "./style.module.css"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 const Partners = () => {
     const [active, setActive] = useState(false)
+    const router = useRouter()
 
     const partners = [
-        <Partner1 key="1" />,
-        <Partner2 key="2" />,
-        <Partner3 key="3" />,
-        <Partner4 key="4" />,
-        <Partner5 key="5" />,
-        <Partner6 key="6" />,
-        <Partner7 key="7" />,
-        <Partner8 key="8" />
+        { component: <Partner1 key="1" />, link: "https://www.gsverf.ru/" },
+        { component: <Partner2 key="2" />, link: "http://www.almaz-antey.ru/" },
+        { component: <Partner3 key="3" />, link: "https://ktrv.ru" },
+        { component: <Partner4 key="4" />, link: "https://www.rosatom.ru/index.html" },
+        { component: <Partner5 key="5" />, link: "https://ese-osg.ru/" },
+        { component: <Partner6 key="6" />, link: "https://www.sibur.ru/rusvinyl/" },
+        { component: <Partner7 key="7" />, link: "https://www.rzd.ru/" },
+        { component: <Partner8 key="8" />, link: "https://www.tplusgroup.ru/" },
     ]
 
     return (
@@ -31,8 +33,8 @@ const Partners = () => {
 
             <div className={`${styles.List} ${active ? styles.Active : ""}`}>
                 {partners.map((partner, index) => (
-                    <div key={index}>
-                        {partner}
+                    <div key={index} onClick={() => router.push(partner.link)}>
+                        {partner.component}
                     </div>
                 ))}
             </div>

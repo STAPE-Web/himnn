@@ -23,6 +23,8 @@ const SliderBox = () => {
         dotsClass: styles.Controlls,
     };
 
+    const titles = ["Паронит ПОН-Б 3мм (1500х1700)", "Паронит ПОН-Б ГОСТ 481-80", "Капролон стержневой", "Пластина МБС-С ГОСТ 7338-90", "Фторопласт листовой"]
+
     return (
         <Slider {...settings}>
             {[0, 1, 2, 3, 4].map((index) => (
@@ -32,7 +34,7 @@ const SliderBox = () => {
                         style={{ background: `url("/Home_Slider_${index}.png") no-repeat` }}
                     >
                         <div className={styles.Box}>
-                            <h1>Паронит ПОН-Б 3мм (1500х1700)</h1>
+                            <h1>{titles[index]}</h1>
                             <ul>
                                 <li>ГОСТ 481-80</li>
                                 <li>В наличии </li>
@@ -40,7 +42,7 @@ const SliderBox = () => {
                             <ButtonDefault onClick={() => router.push("/catalog")}>Перейти в каталог</ButtonDefault>
                         </div>
 
-                        <img className={styles.Image} src={`/SliderItem_${index}.png`} alt="" />
+                        <img className={styles.Image} src={`/SliderItem_${index !== 0 ? 1 : 0}.png`} alt="" />
                     </section>
                 </div>
             ))}
