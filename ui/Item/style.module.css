@@ -98,7 +98,7 @@
 }
 
 .Item.Active {
-    
+    border-color: #BEBEBE;
     position: absolute;
     width: 100%;
     z-index: 100;
