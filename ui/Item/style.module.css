@@ -1,6 +1,6 @@
 .ItemBox {
     position: relative;
-    width: 282.66px;
+    width: 282px;
     min-height: 396px;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .Item.Active {
-    border-color: #BEBEBE;
+    
     position: absolute;
     width: 100%;
     z-index: 100;
