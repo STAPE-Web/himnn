@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { ICategory } from "@/types";
 import { CategoriesAPI } from "@/api";
+import Link from "next/link";
 
 interface Props {
   category: string;
@@ -27,15 +28,14 @@ const CategoryItems: FC<Props> = ({ category, subcategory }) => {
 
   return (
     <div
-      className={`${styles.List} ${subcategory !== "" ? styles.Hidden : ""} ${
-        data.filter(
-          (i) =>
-            i.data.category.toLowerCase() ===
-            category.toLowerCase().replace(/-/g, " ")
-        ).length === 0
-          ? styles.Hidden
-          : ""
-      }`}
+      className={`${styles.List} ${subcategory !== "" ? styles.Hidden : ""} ${data.filter(
+        (i) =>
+          i.data.category.toLowerCase() ===
+          category.toLowerCase().replace(/-/g, " ")
+      ).length === 0
+        ? styles.Hidden
+        : ""
+        }`}
     >
       {data
         .filter(
@@ -44,24 +44,21 @@ const CategoryItems: FC<Props> = ({ category, subcategory }) => {
             category.toLowerCase().replace(/-/g, " ")
         )
         .map((item, index) => (
-          <div
-            key={index}
-            className={styles.Item}
-            onClick={() =>
-              router.push(
-                `/category?c=${category}&sub=${item.data.title
-                  .toLowerCase()
-                  .replace(/ /g, "-")}`
-              )
-            }
-          >
-            <Image src={item.data.image} width={220} height={220} alt="" />
+          <Link href={`/category?c=${category}&sub=${item.data.title
+            .toLowerCase()
+            .replace(/ /g, "-")}`}>
+            <div
+              key={index}
+              className={styles.Item}
+            >
+              <Image src={item.data.image} width={220} height={220} alt="" />
 
-            <div>
-              <h3>{item.data.title}</h3>
-              <p>{item.data.text}</p>
+              <div>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.text}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
     </div>
   );

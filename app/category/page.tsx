@@ -32,19 +32,19 @@ const Category = () => {
   const bread =
     subcategory === ""
       ? [
-          { link: "/", name: "Главная" },
-          { link: "/catalog", name: "Каталог" },
-          { link: `/category?c=${category}`, name: categoryTitle },
-        ]
+        { link: "/", name: "Главная" },
+        { link: "/catalog", name: "Каталог" },
+        { link: `/category?c=${category}`, name: categoryTitle },
+      ]
       : [
-          { link: "/", name: "Главная" },
-          { link: "/catalog", name: "Каталог" },
-          { link: `/category?c=${category}`, name: categoryTitle },
-          {
-            link: `/category?c=${category}&sub=${subcategory}`,
-            name: subcategoryTitle,
-          },
-        ];
+        { link: "/", name: "Главная" },
+        { link: "/catalog", name: "Каталог" },
+        { link: `/category?c=${category}`, name: categoryTitle },
+        {
+          link: `/category?c=${category}&sub=${subcategory}`,
+          name: subcategoryTitle,
+        },
+      ];
 
   return (
     <Layout>
