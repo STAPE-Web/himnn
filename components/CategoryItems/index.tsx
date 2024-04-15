@@ -44,7 +44,7 @@ const CategoryItems: FC<Props> = ({ category, subcategory }) => {
             category.toLowerCase().replace(/-/g, " ")
         )
         .map((item, index) => (
-          <Link href={`/category?c=${category}&sub=${item.data.title
+          <a href={`/category?c=${category}&sub=${item.data.title
             .toLowerCase()
             .replace(/ /g, "-")}`} key={index}>
             <div className={styles.Item}>
@@ -55,7 +55,7 @@ const CategoryItems: FC<Props> = ({ category, subcategory }) => {
                 <p>{item.data.text}</p>
               </div>
             </div>
-          </Link>
+          </a>
         ))}
     </div>
   );
