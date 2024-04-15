@@ -46,11 +46,8 @@ const CategoryItems: FC<Props> = ({ category, subcategory }) => {
         .map((item, index) => (
           <Link href={`/category?c=${category}&sub=${item.data.title
             .toLowerCase()
-            .replace(/ /g, "-")}`}>
-            <div
-              key={index}
-              className={styles.Item}
-            >
+            .replace(/ /g, "-")}`} key={index}>
+            <div className={styles.Item}>
               <Image src={item.data.image} width={220} height={220} alt="" />
 
               <div>
