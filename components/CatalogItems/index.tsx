@@ -2,7 +2,7 @@
 
 import Item from "@/ui/Item"
 import styles from "./style.module.css"
-import { FC, useEffect, useState } from "react"
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from "react"
 import { ItemsAPI } from "@/api"
 import { IItems } from "@/types"
 
@@ -13,19 +13,23 @@ interface Props {
     items: string[]
     min: string
     max: string
+    setInStockCount: Dispatch<SetStateAction<number>>
 }
 
-const CatalogItems: FC<Props> = ({ category, subcategory, filterData, items, min, max }) => {
+const CatalogItems: FC<Props> = ({ category, subcategory, filterData, items, min, max, setInStockCount }) => {
     const [data, setData] = useState<IItems[]>([])
 
-    async function getAllCatalogs() {
-        const result = await ItemsAPI.getAll()
+
+    const getAllCatalogs = useCallback(async () => {
+        const result: IItems[] = await ItemsAPI.getAll()
         setData(result)
-    }
+        setInStockCount(result.filter(i => i.data.category.toLowerCase() === category.toLowerCase().replace(/-/g, ' '))
+            .filter(i => subcategory !== "" ? i.data.subcategory.toLowerCase() === subcategory.toLowerCase().replace(/-/g, ' ') : true).filter(i => i.data.inStock === true).length)
+    }, [subcategory, category])
 
     useEffect(() => {
         getAllCatalogs()
-    }, [])
+    }, [getAllCatalogs])
 
     return (
         <div className={styles.List}>

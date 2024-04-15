@@ -18,11 +18,12 @@ interface Props {
     min: string
     setItems: Dispatch<SetStateAction<string[]>>
     items: string[]
+    inStockCount: number
 
 }
 
-const Filter: FC<Props> = ({ filterData, setFilterData, max, min, setMax, setMin, setItems, items }) => {
-    const itemsArray = ["В наличии (100)"]
+const Filter: FC<Props> = ({ filterData, setFilterData, max, min, setMax, setMin, setItems, items, inStockCount }) => {
+    const itemsArray = [`В наличии (${inStockCount})`]
     const [active, setActive] = useState(false)
     const [data, setData] = useState<IFilter[]>([])
     const [maxPrice, setMaxPrice] = useState("1000000")

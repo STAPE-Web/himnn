@@ -2,29 +2,29 @@
 
 import Image from "next/image";
 import styles from "./style.module.css";
-import { useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from "react";
 import { ICategory } from "@/types";
 import { CategoriesAPI } from "@/api";
-import Link from "next/link";
 
 interface Props {
   category: string;
   subcategory: string;
+  setSubText: Dispatch<SetStateAction<string>>
+  subcategoryTitle: string
 }
 
-const CategoryItems: FC<Props> = ({ category, subcategory }) => {
-  const router = useRouter();
+const CategoryItems: FC<Props> = ({ category, subcategory, setSubText, subcategoryTitle }) => {
   const [data, setData] = useState<ICategory[]>([]);
 
-  async function getAllCatalogs() {
-    const result = await CategoriesAPI.getAll();
+  const getAllCatalogs = useCallback(async () => {
+    const result: ICategory[] = await CategoriesAPI.getAll();
     setData(result);
-  }
+    setSubText(result.filter(i => i.data.title.toLowerCase().trim() === subcategoryTitle)[0].data.text)
+  }, [subcategoryTitle])
 
   useEffect(() => {
     getAllCatalogs();
-  }, []);
+  }, [getAllCatalogs]);
 
   return (
     <div

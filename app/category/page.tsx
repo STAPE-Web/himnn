@@ -18,6 +18,8 @@ const Category = () => {
   const [subcategory, setsubcategory] = useState("");
   const [categoryTitle, setcategoryTitle] = useState("");
   const [subcategoryTitle, setsubcategoryTitle] = useState("");
+  const [subText, setSubText] = useState("");
+  const [inStockCount, setInStockCount] = useState(0);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -53,6 +55,7 @@ const Category = () => {
           <Bread array={bread} />
 
           <h2>{subcategoryTitle === "" ? categoryTitle : subcategoryTitle}</h2>
+          {subText !== "" && <pre>{subText}</pre>}
 
           <div className={styles.Row}>
             <Filter
@@ -64,6 +67,7 @@ const Category = () => {
               setMin={setMin}
               items={items}
               setItems={setItems}
+              inStockCount={inStockCount}
             />
 
             <div className={styles.Items}>
@@ -71,6 +75,8 @@ const Category = () => {
                 <CategoryItems
                   category={category as string}
                   subcategory={subcategory as string}
+                  setSubText={setSubText}
+                  subcategoryTitle={subcategoryTitle}
                 />
               )}
               <CatalogItems
@@ -80,6 +86,7 @@ const Category = () => {
                 items={items}
                 min={min}
                 max={max}
+                setInStockCount={setInStockCount}
               />
             </div>
           </div>

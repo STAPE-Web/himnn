@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { FC } from "react"
 import styles from "./style.module.css"
 
@@ -16,7 +15,7 @@ const Bread: FC<Props> = ({ array }) => {
         <div className={styles.Bread}>
             {array.map((arr, index) => (
                 <div key={index}>
-                    <Link href={arr.link}>{arr.name}</Link>
+                    <a href={arr.link}>{arr.name}</a>
                     <p>-</p>
                 </div>
             ))}
