@@ -16,7 +16,7 @@ const Bread: FC<Props> = ({ array }) => {
             {array.map((arr, index) => (
                 <div key={index}>
                     <a href={arr.link}>{arr.name}</a>
-                    <p>-</p>
+                    <p>–</p>
                 </div>
             ))}
         </div>
