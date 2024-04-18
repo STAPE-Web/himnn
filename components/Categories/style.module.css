@@ -58,6 +58,10 @@
   line-height: 140%;
   font-weight: 300;
   color: #4e4e4e;
+  display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 1250px) {
