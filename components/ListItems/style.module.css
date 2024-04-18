@@ -61,10 +61,7 @@
     line-height: 140%;
     font-weight: 300;
     word-break: break-all;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+   
 }
 
 @media screen and (max-width: 1250px) {
