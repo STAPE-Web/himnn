@@ -51,7 +51,7 @@ const Categories = () => {
             {data.map((item, index) => (
                 <div key={index} className={styles.Item}>
                     <div className={styles.ItemBox}>
-                        <Image src={item.data.image} width={100} height={100} alt="" />
+                        <img src={item.data.image} width={100} height={100} alt="" />
 
                         <div className={styles.Data}>
                             <h3>{item.data.title} · <span>{item.data.category}</span></h3>
