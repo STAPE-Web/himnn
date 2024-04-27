@@ -48,7 +48,7 @@ const FavoriteItem: FC<Props> = ({ item }) => {
         <>
             <div className={styles.Item}>
                 <div className={styles.Fill}>
-                    <Image src={item.image} width={220} height={150} alt="" />
+                    <img src={item.image} width={220} height={150} alt="" />
                     <p>{item.title}</p>
                 </div>
 
@@ -67,7 +67,7 @@ const FavoriteItem: FC<Props> = ({ item }) => {
 
             <div className={styles.MobileItem}>
                 <div className={styles.Left}>
-                    <Image src={item.image} width={220} height={150} alt="" />
+                    <img src={item.image} width={220} height={150} alt="" />
                 </div>
 
                 <div className={styles.Right}>
