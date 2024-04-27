@@ -31,7 +31,7 @@ const ListItems = () => {
             <div className={styles.List}>
                 {data.map((item, index) => (
                     <div key={index} className={styles.Item}>
-                        <Image src={item.data.image} width={300} height={250} alt="" />
+                        <img src={item.data.image} width={300} height={250} alt="" />
 
                         <div>
                             <h3>{item.data.title}</h3>
