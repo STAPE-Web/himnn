@@ -63,7 +63,7 @@ const CartItem: FC<Props> = ({ item }) => {
 
             <div className={styles.MobileItem}>
                 <div className={styles.Left}>
-                    <Image src={item.image} width={220} height={150} alt="" />
+                    <img src={item.image} width={220} height={150} alt="" />
                     <Counter setValue={CountChanges} value={String(item.count)} />
                 </div>
 
