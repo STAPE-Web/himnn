@@ -48,7 +48,7 @@ const CategoryItems: FC<Props> = ({ category, subcategory, setSubText, subcatego
             .toLowerCase()
             .replace(/ /g, "-")}`} key={index}>
             <div className={styles.Item}>
-              <Image src={item.data.image} width={220} height={220} alt="" />
+              <img src={item.data.image} width={220} height={220} alt="" />
 
               <div>
                 <h3>{item.data.title}</h3>
