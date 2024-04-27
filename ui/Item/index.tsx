@@ -87,7 +87,7 @@ const Item: FC<Props> = ({ item }) => {
                     addToFavorite()
                 }} />
 
-                <Image alt="" src={item.data.image} width={280} height={200} />
+                <img alt="" src={item.data.image} width={280} height={200} />
 
                 <div className={styles.Box}>
                     <h3>{item.data.title}</h3>
