@@ -30,7 +30,7 @@ const Categories = () => {
             <div className={styles.List}>
                 {data.map((item, index) => (
                     <div key={index} className={styles.Item} onClick={() => router.push(`/category?c=${item.data.title.toLowerCase().replace(/ /g, '-')}`)}>
-                        <img src={item.data.image} width={280} height={250} alt="" />
+                        <img src={decodeURIComponent(item.data.image)} width={280} height={250} alt="" />
 
                         <div>
                             <h3>{item.data.title}</h3>
